@@ -6,8 +6,11 @@ This repository currently contains the first working vertical slice of the websi
 homepage, About and Contact pages, a published events section, and a secure administrator area for
 managing events and reading contact messages.
 
-> **Status:** foundation and first vertical slice. Some content is intentionally pending approval
-> (see [Pending work](#pending-work)). Demonstration content is always labelled.
+> **Status:** under active development. The implementation described in this README lives on the
+> [`feat/cso-foundation`](https://github.com/moseschazama/MUST-CSO-system/tree/feat/cso-foundation)
+> branch; `main` only contains the Laravel application skeleton until the foundation is reviewed and
+> merged. Some content is intentionally pending approval (see [Pending work](#pending-work)).
+> Demonstration content is always labelled.
 
 ---
 
@@ -94,8 +97,11 @@ managing events and reading contact messages.
 
 ### 1. Clone and install PHP dependencies
 
+The foundation currently lives on the `feat/cso-foundation` branch, so clone that branch (drop
+`--branch feat/cso-foundation` once it has been merged into `main`):
+
 ```bash
-git clone https://github.com/moseschazama/MUST-CSO-system.git
+git clone --branch feat/cso-foundation https://github.com/moseschazama/MUST-CSO-system.git
 cd MUST-CSO-system
 composer install
 ```
@@ -370,7 +376,9 @@ The following are intentionally **not** implemented in this first vertical slice
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. In short:
+Please read
+[CONTRIBUTING.md](https://github.com/moseschazama/MUST-CSO-system/blob/feat/cso-foundation/CONTRIBUTING.md)
+(currently on the `feat/cso-foundation` branch) before opening a pull request. In short:
 
 1. Branch from `main` using `feat/…`, `fix/…`, or `chore/…`.
 2. Keep changes focused and add tests for new behaviour.
