@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="MUST Catholic Students Organisation">
+    <rect width="48" height="48" rx="10" fill="#3a0e1c"/>
+    <path d="M24 7.5 39 12.7v10c0 9.8-5.8 16.4-15 21.1-9.2-4.7-15-11.3-15-21.1v-10L24 7.5Z" fill="none" stroke="#cfb07b" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M24 15v13" stroke="#e3cfa8" stroke-width="2" stroke-linecap="round"/>
+    <path d="M18.5 20.5h11" stroke="#e3cfa8" stroke-width="2" stroke-linecap="round"/>
+    <path d="M18.5 33.5c2-3 3.9-4.5 5.5-4.5s3.5 1.5 5.5 4.5" stroke="#cfb07b" stroke-width="2" stroke-linecap="round" fill="none"/>
+</svg>

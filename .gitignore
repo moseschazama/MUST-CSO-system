@@ -1,18 +1,17 @@
+# Laravel and PHP
 *.log
-.DS_Store
-.env
-.env.backup
-.env.production
 .phpactor.json
 .phpunit.result.cache
-/.codex
-/.cursor/
-/.idea
-/.nova
 /.phpunit.cache
-/.vscode
-/.zed
-/auth.json
+_ide_helper.php
+
+# Environment and secrets — never commit these
+.env
+.env.*
+!.env.example
+/.auth.json
+
+# Dependencies and build output
 /node_modules
 /public/build
 /public/fonts-manifest.dev.json
@@ -21,7 +20,22 @@
 /storage/*.key
 /storage/pail
 /vendor
-_ide_helper.php
+
+# Local database files and dumps
+/database/*.sqlite
+/database/*.sqlite-journal
+/database/dumps/
+
+# Editor and operating system files
+.DS_Store
+Thumbs.db
+/.codex
+/.cursor/
+/.idea
+/.nova
+/.vscode
+/.zed
+
+# Tooling
 Homestead.json
 Homestead.yaml
-Thumbs.db

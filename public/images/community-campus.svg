@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" role="img" aria-label="Illustrative artwork of a campus building with an arcade">
+    <defs>
+        <linearGradient id="campus-bg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f6efe2"/>
+            <stop offset="1" stop-color="#e2d3b8"/>
+        </linearGradient>
+        <linearGradient id="campus-gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e3cfa8"/>
+            <stop offset="1" stop-color="#b58a4a"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="900" height="700" fill="url(#campus-bg)"/>
+
+    <circle cx="700" cy="150" r="62" fill="url(#campus-gold)" opacity="0.9"/>
+    <g stroke="#b58a4a" stroke-width="2" opacity="0.6">
+        <path d="M700 62v-22"/>
+        <path d="M700 238v22"/>
+        <path d="M612 150h-22"/>
+        <path d="M788 150h22"/>
+        <path d="M638 88l-16-16"/>
+        <path d="M762 212l16 16"/>
+        <path d="M762 88l16-16"/>
+        <path d="M638 212l-16 16"/>
+    </g>
+
+    <g>
+        <rect x="180" y="240" width="86" height="320" fill="#52172b"/>
+        <path d="M180 240h86l-43-46z" fill="#6a1f37"/>
+        <path d="M214 180v-34" stroke="#966f36" stroke-width="4"/>
+        <path d="M200 194h28" stroke="#966f36" stroke-width="4"/>
+        <path d="M196 430a27 34 0 0 1 54 0v130h-54z" fill="#f6efe2" opacity="0.9"/>
+        <path d="M196 430a27 34 0 0 1 54 0" fill="none" stroke="#966f36" stroke-width="3"/>
+        <rect x="196" y="560" width="54" height="20" fill="#966f36" opacity="0.6"/>
+    </g>
+
+    <g>
+        <path d="M280 300 450 196l170 104z" fill="#6a1f37"/>
+        <rect x="300" y="300" width="300" height="260" fill="#52172b"/>
+        <circle cx="450" cy="262" r="24" fill="none" stroke="#e3cfa8" stroke-width="3"/>
+        <path d="M450 250v14l10 8" stroke="#e3cfa8" stroke-width="2.4" fill="none"/>
+        <g fill="#f6efe2">
+            <path d="M332 560V470a28 36 0 0 1 56 0v90z"/>
+            <path d="M422 560V470a28 36 0 0 1 56 0v90z" opacity="0.92"/>
+            <path d="M512 560V470a28 36 0 0 1 56 0v90z"/>
+        </g>
+        <g stroke="#966f36" stroke-width="2.6" fill="none">
+            <path d="M332 470a28 36 0 0 1 56 0"/>
+            <path d="M422 470a28 36 0 0 1 56 0"/>
+            <path d="M512 470a28 36 0 0 1 56 0"/>
+        </g>
+        <rect x="300" y="560" width="300" height="18" fill="#966f36" opacity="0.55"/>
+    </g>
+
+    <g>
+        <path d="M744 560V440" stroke="#332f2a" stroke-width="10"/>
+        <circle cx="744" cy="404" r="52" fill="#b58a4a" opacity="0.55"/>
+        <circle cx="700" cy="450" r="34" fill="#966f36" opacity="0.5"/>
+        <circle cx="790" cy="446" r="34" fill="#966f36" opacity="0.45"/>
+    </g>
+
+    <g stroke="#332f2a" stroke-width="3" opacity="0.75">
+        <path d="M90 560h720"/>
+        <path d="M90 590h720" opacity="0.5"/>
+    </g>
+
+    <g stroke="#4a443d" stroke-width="2.4" fill="none" opacity="0.7">
+        <path d="M560 120c10-14 22-14 32 0"/>
+        <path d="M616 96c10-14 22-14 32 0"/>
+    </g>
+</svg>

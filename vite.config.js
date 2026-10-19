@@ -9,8 +9,17 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
             fonts: [
-                bunny('Instrument Sans', {
+                bunny('Cormorant Garamond', {
+                    alias: 'cormorant',
+                    weights: [500, 600, 700],
+                    subsets: ['latin'],
+                    optimizedFallbacks: false,
+                }),
+                bunny('Source Sans 3', {
+                    alias: 'source-sans',
                     weights: [400, 500, 600],
+                    subsets: ['latin'],
+                    optimizedFallbacks: false,
                 }),
             ],
         }),

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" role="img" aria-label="Illustrative artwork of a cloister arcade and a gathering">
+    <defs>
+        <linearGradient id="fellowship-bg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fbf7ef"/>
+            <stop offset="1" stop-color="#ede2ce"/>
+        </linearGradient>
+        <radialGradient id="fellowship-sun" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" stop-color="#e3cfa8"/>
+            <stop offset="1" stop-color="#cfb07b"/>
+        </radialGradient>
+    </defs>
+
+    <rect width="900" height="700" fill="url(#fellowship-bg)"/>
+
+    <circle cx="450" cy="210" r="104" fill="url(#fellowship-sun)" opacity="0.9"/>
+    <g stroke="#b58a4a" stroke-width="2" opacity="0.65">
+        <path d="M450 66v-28"/>
+        <path d="M450 382v-28"/>
+        <path d="M306 210h-28"/>
+        <path d="M622 210h-28"/>
+        <path d="M348 108l-20-20"/>
+        <path d="M552 312l20 20"/>
+        <path d="M552 108l20-20"/>
+        <path d="M348 312l-20 20"/>
+    </g>
+
+    <g stroke="#332f2a" fill="none" stroke-width="3" opacity="0.85">
+        <path d="M90 620V470a90 90 0 0 1 180 0v150"/>
+        <path d="M360 620V470a90 90 0 0 1 180 0v150"/>
+        <path d="M630 620V470a90 90 0 0 1 180 0v150"/>
+    </g>
+
+    <g stroke="#6a1f37" fill="none" stroke-width="2.4" opacity="0.75">
+        <circle cx="370" cy="470" r="74"/>
+        <circle cx="530" cy="470" r="74"/>
+    </g>
+    <circle cx="450" cy="470" r="34" fill="#b58a4a" opacity="0.28"/>
+    <circle cx="450" cy="470" r="34" fill="none" stroke="#966f36" stroke-width="2"/>
+
+    <g stroke="#332f2a" stroke-width="3" opacity="0.8">
+        <path d="M120 620h660"/>
+        <path d="M180 620v34"/>
+        <path d="M300 620v34"/>
+        <path d="M600 620v34"/>
+        <path d="M720 620v34"/>
+    </g>
+</svg>

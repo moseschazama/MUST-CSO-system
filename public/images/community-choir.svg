@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" role="img" aria-label="Illustrative artwork of sound waves rising in an arched hall">
+    <defs>
+        <linearGradient id="choir-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#2a0a14"/>
+            <stop offset="0.6" stop-color="#52172b"/>
+            <stop offset="1" stop-color="#822a46"/>
+        </linearGradient>
+        <linearGradient id="choir-gold" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#e3cfa8"/>
+            <stop offset="1" stop-color="#b58a4a"/>
+        </linearGradient>
+        <radialGradient id="choir-glow" cx="0.3" cy="0.55" r="0.6">
+            <stop offset="0" stop-color="#cfb07b" stop-opacity="0.4"/>
+            <stop offset="1" stop-color="#cfb07b" stop-opacity="0"/>
+        </radialGradient>
+    </defs>
+
+    <rect width="900" height="700" fill="url(#choir-bg)"/>
+    <circle cx="250" cy="350" r="420" fill="url(#choir-glow)"/>
+
+    <g stroke="#e3cfa8" fill="none" opacity="0.5">
+        <path d="M140 640V420C140 275 230 180 450 104C670 180 760 275 760 420v220" stroke-width="3"/>
+    </g>
+
+    <circle cx="240" cy="350" r="58" fill="url(#choir-gold)" opacity="0.95"/>
+    <circle cx="240" cy="350" r="58" fill="none" stroke="#fbf7ef" stroke-width="1.4" opacity="0.5"/>
+
+    <g stroke="url(#choir-gold)" fill="none" stroke-linecap="round">
+        <path d="M317 258a120 120 0 0 1 0 184" stroke-width="6" opacity="0.95"/>
+        <path d="M356 212a180 180 0 0 1 0 276" stroke-width="5" opacity="0.8"/>
+        <path d="M394 166a240 240 0 0 1 0 368" stroke-width="4" opacity="0.6"/>
+        <path d="M433 120a300 300 0 0 1 0 460" stroke-width="3" opacity="0.4"/>
+    </g>
+
+    <g fill="#e3cfa8">
+        <circle cx="317" cy="258" r="9"/>
+        <circle cx="317" cy="442" r="9"/>
+        <circle cx="356" cy="212" r="7" opacity="0.8"/>
+        <circle cx="356" cy="488" r="7" opacity="0.8"/>
+        <circle cx="394" cy="166" r="6" opacity="0.6"/>
+        <circle cx="394" cy="534" r="6" opacity="0.6"/>
+    </g>
+
+    <g stroke="#fbf7ef" stroke-width="2" opacity="0.35">
+        <path d="M620 250v150"/>
+        <path d="M620 250a34 22 0 1 1 0 44"/>
+        <path d="M700 300v110"/>
+        <path d="M700 300a26 17 0 1 1 0 34"/>
+    </g>
+
+    <g stroke="#e3cfa8" fill="none" opacity="0.55">
+        <path d="M120 640h660" stroke-width="2"/>
+        <path d="M160 664h580" stroke-width="1.6"/>
+    </g>
+</svg>

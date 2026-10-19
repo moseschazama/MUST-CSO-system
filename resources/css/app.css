@@ -2,8 +2,205 @@
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Source Sans 3', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Cormorant Garamond', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+
+    --color-ivory-50: #fbf7ef;
+    --color-ivory-100: #f6efe2;
+    --color-ivory-200: #ede2ce;
+    --color-ivory-300: #e2d3b8;
+
+    --color-burgundy-950: #240811;
+    --color-burgundy-900: #3a0e1c;
+    --color-burgundy-800: #52172b;
+    --color-burgundy-700: #6a1f37;
+    --color-burgundy-600: #822a46;
+    --color-burgundy-500: #9a3a57;
+
+    --color-gold-300: #e3cfa8;
+    --color-gold-400: #cfb07b;
+    --color-gold-500: #b58a4a;
+    --color-gold-600: #966f36;
+    --color-gold-700: #785728;
+
+    --color-charcoal-950: #171513;
+    --color-charcoal-900: #1f1c19;
+    --color-charcoal-800: #332f2a;
+    --color-charcoal-700: #4a443d;
+    --color-charcoal-600: #635c53;
+    --color-charcoal-500: #7e766b;
+
+    --shadow-soft: 0 30px 70px -40px rgb(36 8 17 / 0.45);
+    --shadow-card: 0 18px 40px -28px rgb(36 8 17 / 0.35);
+
+    --radius-card: 0.5rem;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-ivory-50 font-sans text-charcoal-900 antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply font-serif font-semibold text-balance;
+    }
+
+    :focus-visible {
+        outline: 3px solid var(--color-burgundy-700);
+        outline-offset: 3px;
+    }
+
+    .theme-dark :focus-visible {
+        outline-color: var(--color-gold-300);
+    }
+
+    ::selection {
+        background-color: var(--color-gold-300);
+        color: var(--color-burgundy-950);
+    }
+}
+
+@layer components {
+    .container-page {
+        @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+    }
+
+    .eyebrow {
+        @apply text-xs font-semibold uppercase tracking-[0.24em];
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 border px-6 py-3 text-sm font-semibold tracking-wide transition-colors duration-200;
+    }
+
+    .btn-primary {
+        @apply border-burgundy-800 bg-burgundy-800 text-ivory-50 hover:border-burgundy-700 hover:bg-burgundy-700;
+    }
+
+    .btn-outline {
+        @apply border-charcoal-900/25 bg-transparent text-charcoal-900 hover:border-burgundy-800 hover:text-burgundy-800;
+    }
+
+    .btn-gold {
+        @apply border-gold-500 bg-gold-500 text-burgundy-950 hover:border-gold-400 hover:bg-gold-400;
+    }
+
+    .btn-on-dark {
+        @apply border-ivory-50/40 text-ivory-50 hover:border-gold-300 hover:text-gold-300;
+    }
+
+    .card {
+        @apply border border-charcoal-900/10 bg-white shadow-card;
+    }
+
+    .badge {
+        @apply inline-flex items-center gap-1.5 px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.16em];
+    }
+
+    .badge-demo {
+        @apply bg-gold-300 text-burgundy-950;
+    }
+
+    .badge-published {
+        @apply bg-green-100 text-green-900;
+    }
+
+    .badge-draft {
+        @apply bg-charcoal-900/10 text-charcoal-800;
+    }
+
+    .nav-link {
+        @apply text-sm font-medium text-charcoal-800 transition-colors hover:text-burgundy-800;
+    }
+
+    .nav-link-active {
+        @apply text-burgundy-800;
+    }
+
+    .admin-nav-link {
+        @apply px-3 py-2 text-sm font-semibold text-ivory-50/80 transition-colors hover:bg-ivory-50/10 hover:text-ivory-50;
+    }
+
+    .admin-nav-link-active {
+        @apply bg-ivory-50/15 text-ivory-50;
+    }
+
+    .form-label {
+        @apply block text-sm font-semibold text-charcoal-900;
+    }
+
+    .form-input {
+        @apply mt-2 block w-full border border-charcoal-900/20 bg-white px-4 py-3 text-base text-charcoal-900 shadow-sm transition placeholder:text-charcoal-500/70 focus:border-burgundy-800 focus:outline-none focus:ring-2 focus:ring-gold-400/50;
+    }
+
+    .form-checkbox {
+        @apply h-5 w-5 accent-burgundy-800;
+    }
+
+    .form-help {
+        @apply mt-2 text-sm leading-relaxed text-charcoal-600;
+    }
+
+    .form-error {
+        @apply mt-2 text-sm font-medium text-red-800;
+    }
+
+    .prose-cso {
+        @apply text-base leading-relaxed text-charcoal-700;
+    }
+
+    .prose-cso p + p {
+        @apply mt-4;
+    }
+
+    .media-frame {
+        @apply relative overflow-hidden border border-charcoal-900/10 bg-burgundy-900 shadow-card;
+    }
+}
+
+.hero-texture {
+    background-color: var(--color-burgundy-950);
+    background-image:
+        radial-gradient(ellipse 80% 60% at 12% 0%, rgb(181 138 74 / 0.28), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 92% 8%, rgb(130 42 70 / 0.5), transparent 65%),
+        linear-gradient(160deg, #240811 0%, #3a0e1c 45%, #52172b 100%);
+}
+
+.section-texture {
+    background-image:
+        radial-gradient(circle at 8% 10%, rgb(181 138 74 / 0.12), transparent 32%),
+        radial-gradient(circle at 92% 90%, rgb(82 23 43 / 0.08), transparent 38%);
+}
+
+.rule-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-gold-500), transparent);
+}
+
+.arch-clip {
+    clip-path: polygon(0 100%, 0 42%, 6% 28%, 18% 16%, 32% 8%, 46% 4%, 50% 0, 54% 4%, 68% 8%, 82% 16%, 94% 28%, 100% 42%, 100% 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

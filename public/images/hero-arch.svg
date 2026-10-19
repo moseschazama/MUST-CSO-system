@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1150" role="img" aria-label="Illustrative stained-glass-inspired artwork of a rose window beneath a pointed arch">
+    <defs>
+        <linearGradient id="hero-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#1c060e"/>
+            <stop offset="0.5" stop-color="#3a0e1c"/>
+            <stop offset="1" stop-color="#6a1f37"/>
+        </linearGradient>
+        <radialGradient id="hero-glow" cx="0.5" cy="0.42" r="0.6">
+            <stop offset="0" stop-color="#cfb07b" stop-opacity="0.5"/>
+            <stop offset="0.45" stop-color="#b58a4a" stop-opacity="0.16"/>
+            <stop offset="1" stop-color="#b58a4a" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="hero-vignette" cx="0.5" cy="0.45" r="0.78">
+            <stop offset="0.55" stop-color="#000000" stop-opacity="0"/>
+            <stop offset="1" stop-color="#12040a" stop-opacity="0.78"/>
+        </radialGradient>
+        <linearGradient id="hero-gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e3cfa8"/>
+            <stop offset="1" stop-color="#b58a4a"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="900" height="1150" fill="url(#hero-bg)"/>
+    <circle cx="450" cy="470" r="440" fill="url(#hero-glow)"/>
+
+    <g fill="#e3cfa8" opacity="0.65">
+        <circle cx="132" cy="212" r="2.4"/>
+        <circle cx="768" cy="156" r="2.8"/>
+        <circle cx="104" cy="640" r="2"/>
+        <circle cx="796" cy="702" r="2.2"/>
+        <circle cx="206" cy="916" r="1.8"/>
+        <circle cx="700" cy="960" r="2"/>
+    </g>
+
+    <g stroke="url(#hero-gold)" fill="none">
+        <path d="M180 1090V520C180 336 268 214 450 104C632 214 720 336 720 520v570" stroke-width="3.5"/>
+        <path d="M232 1090V540C232 372 306 268 450 172C594 268 668 372 668 540v550" stroke-width="2" opacity="0.65"/>
+    </g>
+
+    <path d="M450 78l16 24-16 24-16-24z" fill="url(#hero-gold)" opacity="0.9"/>
+
+    <g stroke="url(#hero-gold)" fill="none">
+        <path d="M450 150v96" stroke-width="4" stroke-linecap="round"/>
+        <path d="M404 190h92" stroke-width="4" stroke-linecap="round"/>
+    </g>
+
+    <g stroke="url(#hero-gold)" fill="none" opacity="0.9">
+        <circle cx="450" cy="480" r="232" stroke-width="3"/>
+        <circle cx="450" cy="480" r="196" stroke-width="1.8" opacity="0.85"/>
+        <circle cx="450" cy="480" r="128" stroke-width="1.8" opacity="0.75"/>
+        <circle cx="450" cy="480" r="56" stroke-width="2"/>
+    </g>
+
+    <g fill="#b58a4a" opacity="0.25">
+        <circle cx="610" cy="480" r="24"/>
+        <circle cx="530" cy="619" r="24"/>
+        <circle cx="290" cy="480" r="24"/>
+        <circle cx="370" cy="341" r="24"/>
+        <circle cx="450" cy="320" r="24" fill="#9a3a57" opacity="0.4"/>
+        <circle cx="530" cy="341" r="24" fill="#9a3a57" opacity="0.4"/>
+        <circle cx="370" cy="619" r="24" fill="#9a3a57" opacity="0.4"/>
+        <circle cx="610" cy="480" r="8" fill="#e3cfa8" opacity="0.9"/>
+    </g>
+
+    <g stroke="url(#hero-gold)" stroke-width="1.4" opacity="0.6">
+        <path d="M506 480h140"/>
+        <path d="M498 508l121 70"/>
+        <path d="M478 528l70 121"/>
+        <path d="M450 536v140"/>
+        <path d="M422 528l-70 121"/>
+        <path d="M402 508l-122 70"/>
+        <path d="M394 480H254"/>
+        <path d="M402 452l-122-70"/>
+        <path d="M422 432l-70-122"/>
+        <path d="M450 424V284"/>
+        <path d="M478 432l70-122"/>
+        <path d="M498 452l121-70"/>
+    </g>
+
+    <g stroke="url(#hero-gold)" fill="none" opacity="0.95">
+        <circle cx="450" cy="480" r="40" stroke-width="2"/>
+        <circle cx="478" cy="480" r="8" stroke-width="1.6"/>
+        <circle cx="464" cy="504" r="8" stroke-width="1.6"/>
+        <circle cx="436" cy="504" r="8" stroke-width="1.6"/>
+        <circle cx="422" cy="480" r="8" stroke-width="1.6"/>
+        <circle cx="436" cy="456" r="8" stroke-width="1.6"/>
+        <circle cx="464" cy="456" r="8" stroke-width="1.6"/>
+    </g>
+    <circle cx="450" cy="480" r="13" fill="#e3cfa8" opacity="0.85"/>
+
+    <g stroke="url(#hero-gold)" opacity="0.55" fill="none">
+        <path d="M240 1016h420" stroke-width="3"/>
+        <path d="M264 1046h372" stroke-width="2"/>
+        <path d="M288 1076h324" stroke-width="2"/>
+        <path d="M240 1016v60" stroke-width="3"/>
+        <path d="M660 1016v60" stroke-width="3"/>
+        <path d="M280 1076v-60" stroke-width="2"/>
+        <path d="M620 1076v-60" stroke-width="2"/>
+        <path d="M450 1076v-90" stroke-width="2"/>
+    </g>
+
+    <rect width="900" height="1150" fill="url(#hero-vignette)"/>
+</svg>

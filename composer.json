@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "mustcso/must-cso-website",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "The website for the MUST Catholic Students Organisation — Faith. Fellowship. Service.",
+    "keywords": ["laravel", "catholic", "students", "must", "cso"],
     "license": "MIT",
     "require": {
         "php": "^8.3",
