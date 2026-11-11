@@ -1,0 +1,288 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Design tokens — MUST CSO (blue, Marian) palette.
+--------------------------------------------------------------------------- */
+@theme {
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --color-brand-50: #eef2fa;
+    --color-brand-100: #dce5f5;
+    --color-brand-200: #b9cbeb;
+    --color-brand-300: #8fa8dc;
+    --color-brand-400: #5f84cb;
+    --color-brand-500: #3a6bc9;
+    --color-brand-600: #2451a6;
+    --color-brand-700: #1b3f82;
+    --color-brand-800: #163268;
+    --color-brand-900: #112650;
+    --color-brand-950: #0a1733;
+
+    --color-gold-100: #fdf3d7;
+    --color-gold-300: #eccb74;
+    --color-gold-400: #e0b544;
+    --color-gold-500: #c99b26;
+    --color-gold-600: #a67c1a;
+
+    --color-ink-500: #475569;
+    --color-ink-700: #1e293b;
+    --color-ink-900: #0f172a;
+
+    --radius-4xl: 2rem;
+    --radius-5xl: 2.75rem;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        @apply bg-white text-ink-700 antialiased;
+        font-family: var(--font-sans);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply text-ink-900 font-extrabold tracking-tight;
+    }
+
+    ::selection {
+        @apply bg-brand-200 text-brand-900;
+    }
+
+    :focus-visible {
+        @apply outline-brand-600 outline-2 outline-offset-2;
+    }
+}
+
+@layer components {
+    /* ---- Layout ---- */
+    .container-page {
+        @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+    }
+
+    .section {
+        @apply py-16 sm:py-24;
+    }
+
+    /* ---- Glass surfaces ---- */
+    .glass {
+        @apply border border-white/60 bg-white/70 backdrop-blur-xl;
+    }
+
+    .card {
+        @apply border border-slate-200/70 bg-white rounded-3xl shadow-[0_1px_2px_rgba(15,23,42,.04),0_12px_32px_-12px_rgba(15,23,42,.12)] transition duration-300;
+    }
+
+    .card-hover {
+        @apply hover:-translate-y-1 hover:border-brand-200 hover:shadow-[0_2px_4px_rgba(15,23,42,.05),0_24px_48px_-20px_rgba(36,81,166,.35)];
+    }
+
+    .card-muted {
+        @apply rounded-3xl border border-slate-200/70 bg-slate-50/70;
+    }
+
+    /* ---- Buttons ---- */
+    .btn,
+    .btn-primary,
+    .btn-ghost,
+    .btn-soft {
+        @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition duration-200 disabled:opacity-50;
+    }
+
+    .btn-primary {
+        @apply bg-brand-600 text-white shadow-[0_10px_30px_-10px_rgba(36,81,166,.7)] hover:bg-brand-700;
+    }
+
+    .btn-ghost {
+        @apply border border-slate-200 bg-white/80 text-ink-900 hover:border-brand-300 hover:text-brand-700;
+    }
+
+    .btn-soft {
+        @apply bg-brand-50 text-brand-800 hover:bg-brand-100;
+    }
+
+    .btn-glass {
+        @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-3 text-sm font-semibold text-white backdrop-blur transition duration-200 hover:bg-white/20;
+    }
+
+    .pill-on-dark {
+        @apply inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-bold tracking-[0.18em] text-white/90 uppercase backdrop-blur;
+    }
+
+    .hero-card {
+        @apply flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur transition hover:border-brand-400/40 hover:bg-white/10;
+    }
+
+    .btn-sm {
+        @apply px-4 py-2 text-xs;
+    }
+
+    /* ---- Bits ---- */
+    .pill {
+        @apply inline-flex items-center gap-2 rounded-full border border-brand-200/70 bg-brand-50/80 px-4 py-1.5 text-xs font-semibold tracking-wide text-brand-800 uppercase;
+    }
+
+    .eyebrow {
+        @apply text-brand-700 text-xs font-bold tracking-[0.18em] uppercase;
+    }
+
+    .lead {
+        @apply text-ink-500 text-lg leading-relaxed;
+    }
+
+    .chip {
+        @apply inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-ink-500;
+    }
+
+    .icon-badge {
+        @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 ring-1 ring-brand-100;
+    }
+
+    .divider {
+        @apply h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent;
+    }
+
+    .link-quiet {
+        @apply text-ink-500 hover:text-brand-700 transition;
+    }
+
+    /* ---- Header nav ---- */
+    .nav-link {
+        @apply relative rounded-xl px-3.5 py-2 text-[11px] font-bold tracking-[0.12em] uppercase text-ink-700 transition duration-200 hover:bg-brand-50 hover:text-brand-800;
+    }
+
+    .nav-link-active {
+        @apply bg-brand-50 text-brand-800 shadow-sm ring-1 ring-brand-200;
+    }
+
+    /* ---- Decorative background glows ---- */
+    .glow {
+        @apply pointer-events-none absolute -z-10 rounded-full blur-3xl;
+    }
+}
+
+@layer utilities {
+    /* Sticky header state (toggled by app.js) */
+    #site-header.is-scrolled .site-header-bar {
+        @apply border-slate-200/70 bg-white/90 shadow-[0_10px_30px_-18px_rgba(15,23,42,.45)];
+    }
+
+    /* Transparent header over the dark hero (only when not scrolled) */
+    #site-header.is-transparent:not(.is-scrolled) .site-header-bar {
+        @apply border-white/15 bg-white/5 shadow-none;
+    }
+    #site-header.is-transparent:not(.is-scrolled) .header-brand-main,
+    #site-header.is-transparent:not(.is-scrolled) .header-brand-sub,
+    #site-header.is-transparent:not(.is-scrolled) .nav-link,
+    #site-header.is-transparent:not(.is-scrolled) .header-mobile-toggle,
+    #site-header.is-transparent:not(.is-scrolled) .site-header-bar span.text-ink-900 {
+        @apply text-white;
+    }
+    #site-header.is-transparent:not(.is-scrolled) .nav-link:hover {
+        @apply bg-white/10 text-white;
+    }
+    #site-header.is-transparent:not(.is-scrolled) .header-cta-ghost {
+        @apply border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white;
+    }
+    #site-header.is-transparent:not(.is-scrolled) .header-mobile-toggle {
+        @apply border-white/40 bg-white/10;
+    }
+    #site-header.is-transparent:not(.is-scrolled) .site-header-bar .text-brand-600 {
+        @apply text-brand-300;
+    }
+
+    /* Active tab / filter chip. Selector specificity beats single utilities. */
+    [data-tab].is-active,
+    [data-filter].is-active {
+        @apply border-ink-900 bg-ink-900 text-white shadow-sm;
+    }
+
+    [data-copy].is-copied {
+        @apply border-brand-300 bg-brand-50 text-brand-800;
+    }
+
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    /* Infinite marquee (duplicated track, so it loops seamlessly) */
+    .marquee-track {
+        animation: marquee 38s linear infinite;
+    }
+
+    .marquee-mask {
+        mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+
+    @keyframes marquee {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        scrollbar-width: none;
+    }
+
+    /* Gentle floating motion for the "Every Student / One Community" photo cards */
+    .ec-float {
+        animation: ec-float 5.5s ease-in-out infinite;
+        will-change: transform;
+    }
+
+    @keyframes ec-float {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-16px);
+        }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+            opacity 0.7s ease,
+            transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .marquee-track {
+        animation: none;
+    }
+
+    .ec-float {
+        animation: none;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
