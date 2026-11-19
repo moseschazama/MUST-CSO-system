@@ -14,8 +14,28 @@ class Report extends Model
         'highlights' => 'array',
     ];
 
+    public function getCoverImageUrlAttribute(): ?string
+    {
+        if (blank($this->cover_image)) {
+            return null;
+        }
+
+        if (str_starts_with($this->cover_image, '/') || str_starts_with($this->cover_image, 'http')) {
+            return $this->cover_image;
+        }
+
+        $local = '/images/gallery/'.$this->cover_image.'.jpg';
+
+        return file_exists(public_path(ltrim($local, '/'))) ? $local : null;
+    }
+
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->where('is_published', true);
+    }
+
     public function scopeLatestFirst(Builder $query): Builder
     {
-        return $query->orderByDesc('activity_date');
+        return $query->published()->orderByDesc('activity_date');
     }
 }

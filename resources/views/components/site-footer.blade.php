@@ -1,19 +1,28 @@
-@php
-    $socials = collect(config('cso.socials'))->filter(fn ($s) => filled($s['url']));
-    $folders = collect(config('cso.drive.folders'));
+﻿@php
+    $socials = collect(config('cso.socials', []));
 @endphp
 
 <footer class="relative mt-24 overflow-hidden bg-ink-900 text-slate-300">
     <div class="glow top-[-8rem] left-1/2 h-72 w-[36rem] -translate-x-1/2 bg-brand-600/25"></div>
 
     <div class="container-page relative pt-16 pb-10">
-        <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+        <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
             {{-- Brand --}}
             <div>
                 <div class="flex items-center gap-3">
-                    <span class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-700 text-white">
-                        <x-icon name="cross" class="h-5 w-5" />
-                    </span>
+                    @if (filled(config('cso.org.logo')))
+                        <span class="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white ring-1 ring-white/20">
+                            <img
+                                src="{{ config('cso.org.logo') }}"
+                                alt="{{ config('cso.org.name') }} logo"
+                                class="h-full w-full object-contain p-0.5"
+                            >
+                        </span>
+                    @else
+                        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-700 text-white">
+                            <x-icon name="cross" class="h-5 w-5" />
+                        </span>
+                    @endif
                     <span class="leading-tight">
                         <span class="block text-sm font-extrabold tracking-tight text-white">MUST CSO</span>
                         <span class="block text-[10px] font-bold tracking-[0.16em] text-brand-300 uppercase">Catholic Students Org.</span>
@@ -26,20 +35,33 @@
                 </p>
 
                 <p class="mt-4 text-sm font-semibold text-brand-300">
-                    “{{ config('cso.org.motto') }}”
+                    "{{ config('cso.org.motto') }}"
                 </p>
 
-                <div class="mt-6 flex flex-wrap gap-2">
+                <div class="mt-6 flex flex-wrap items-center gap-3" aria-label="Follow us online">
                     @foreach ($socials as $social)
-                        <a
-                            href="{{ $social['url'] }}"
-                            target="_blank"
-                            rel="noopener"
-                            class="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition hover:border-brand-400/50 hover:bg-brand-500/10 hover:text-brand-300"
-                            aria-label="{{ $social['label'] }}"
-                        >
-                            <x-icon :name="$social['icon']" class="h-4 w-4" />
-                        </a>
+                        @if (filled($social['url'] ?? null))
+                            <a
+                                href="{{ $social['url'] }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="social-brand-link"
+                                aria-label="{{ $social['label'] }}"
+                                title="{{ $social['label'] }}"
+                            >
+                                <x-social-brand-icon :name="$social['key']" class="h-5 w-5" />
+                            </a>
+                        @else
+                            <span
+                                class="social-brand-link is-unset"
+                                role="img"
+                                aria-label="{{ $social['label'] }}"
+                                title="{{ $social['label'] }}"
+                                aria-disabled="true"
+                            >
+                                <x-social-brand-icon :name="$social['key']" class="h-5 w-5" />
+                            </span>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -66,34 +88,13 @@
                     @foreach ([
                         'News & Events' => 'news',
                         'Gallery' => 'gallery',
+                        'Daily Readings' => 'daily-readings',
+                        'Prayer Intentions' => 'prayer-intentions.create',
                         'Contact Us' => 'contact',
                     ] as $label => $route)
                         <li><a href="{{ route($route) }}" class="link-quiet">{{ $label }}</a></li>
                     @endforeach
                     <li><a href="{{ route('contact') }}#join" class="link-quiet">Join CSO</a></li>
-                </ul>
-            </div>
-
-            {{-- Drive resources --}}
-            <div>
-                <h3 class="text-xs font-bold tracking-[0.18em] text-white uppercase">Drive Resources</h3>
-                <ul class="mt-5 space-y-3 text-sm">
-                    @foreach ($folders as $folder)
-                        <li>
-                            @if ($folder['url'])
-                                <a href="{{ $folder['url'] }}" target="_blank" rel="noopener" class="group inline-flex items-start gap-2 text-slate-400 transition hover:text-brand-300">
-                                    <x-icon :name="$folder['icon']" class="mt-0.5 h-4 w-4 shrink-0" />
-                                    <span>{{ $folder['title'] }}</span>
-                                    <x-icon name="arrow-up-right" class="mt-0.5 h-3 w-3 shrink-0 opacity-0 transition group-hover:opacity-100" />
-                                </a>
-                            @else
-                                <span class="inline-flex items-start gap-2 text-slate-600">
-                                    <x-icon :name="$folder['icon']" class="mt-0.5 h-4 w-4 shrink-0" />
-                                    <span>{{ $folder['title'] }} <span class="text-[11px]">(soon)</span></span>
-                                </span>
-                            @endif
-                        </li>
-                    @endforeach
                 </ul>
 
                 <a href="mailto:{{ config('cso.contact.email') }}" class="mt-6 inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-brand-400/40 hover:bg-brand-500/10">

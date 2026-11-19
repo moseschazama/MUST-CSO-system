@@ -10,6 +10,8 @@
         eyebrow="Contact us"
         title="We would love to hear from you."
         description="Reach out to join a committee, request prayers, or ask about any CSO activity."
+        image="/images/gallery/1Pt2sQzEhFcWA6VP962TRptoVSN5J-qBP.jpg"
+        breadcrumbs="Contact"
     />
 
     {{-- ===== Contact cards ===== --}}
@@ -71,38 +73,50 @@
     <section class="section container-page bg-slate-50/60 sm:rounded-[2.5rem]">
         <x-section-heading eyebrow="Social platforms" title="Follow us online" center />
 
-        <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        <div class="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
             @foreach ($socials as $social)
-                @if ($social['url'])
+                @if (! empty($social['url']))
                     <a
                         href="{{ $social['url'] }}"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
                         class="card card-hover flex flex-col items-center gap-3 p-5 text-center"
+                        aria-label="{{ $social['label'] }}"
+                        title="{{ $social['label'] }}"
                     >
-                        <span class="icon-badge h-12 w-12 rounded-2xl">
-                            <x-icon :name="$social['icon']" class="h-5 w-5" />
+                        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-slate-50 ring-1 ring-slate-200">
+                            <x-social-brand-icon :name="$social['key']" class="h-6 w-6" />
                         </span>
-                        <div>
-                            <p class="text-sm font-bold text-ink-900">{{ $social['label'] }}</p>
-                            <p class="mt-0.5 text-[11px] text-ink-500">{{ $social['handle'] }}</p>
-                        </div>
+                        <p class="text-sm font-bold text-ink-900">{{ $social['label'] }}</p>
                     </a>
                 @else
-                    <div class="card flex flex-col items-center gap-3 p-5 text-center opacity-50">
-                        <span class="icon-badge h-12 w-12 rounded-2xl">
-                            <x-icon :name="$social['icon']" class="h-5 w-5" />
+                    <div class="card flex flex-col items-center gap-3 p-5 text-center opacity-60" role="img" aria-label="{{ $social['label'] }}" title="{{ $social['label'] }}">
+                        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-slate-50 ring-1 ring-slate-200">
+                            <x-social-brand-icon :name="$social['key']" class="h-6 w-6" />
                         </span>
-                        <div>
-                            <p class="text-sm font-bold text-ink-900">{{ $social['label'] }}</p>
-                            <p class="mt-0.5 text-[11px] text-ink-500">Link coming soon</p>
-                        </div>
+                        <p class="text-sm font-bold text-ink-900">{{ $social['label'] }}</p>
                     </div>
                 @endif
             @endforeach
         </div>
     </section>
 
+
+    {{-- ===== Embedded map ===== --}}
+    <section class="section container-page">
+        <div class="rounded-3xl border border-slate-200/70 bg-white p-4 sm:p-6">
+            <div class="aspect-[16/9] w-full overflow-hidden rounded-2xl bg-slate-100">
+                <iframe
+                    src="https://www.google.com/maps?q=MUST%20Ndata%20Campus%20Thyolo%20Malawi&output=embed"
+                    class="h-full w-full"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="MUST Ndata Campus location map"
+                ></iframe>
+            </div>
+            <p class="mt-4 text-center text-xs text-ink-500">MUST Ndata Campus, Thyolo, Malawi</p>
+        </div>
+    </section>
     {{-- ===== Join ===== --}}
     <section id="join" class="section container-page">
         <div class="grid gap-10 lg:grid-cols-2 lg:items-center">

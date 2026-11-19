@@ -1,4 +1,4 @@
-@props(['title' => null, 'description' => null, 'transparentHeader' => false])
+@props(['title' => null, 'description' => null, 'transparentHeader' => true])
 
 @php
     $pageTitle = $title ? $title.' — '.config('cso.org.name') : config('cso.org.name').' — '.config('cso.org.tagline');
@@ -24,21 +24,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://drive.google.com">
+
+
+    @if (filled(config('cso.org.logo')))
+        <link rel="icon" type="image/png" href="{{ config('cso.org.logo') }}">
+    @endif
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen bg-white">
+@php($isHome = request()->routeIs('home'))
+<body @class(['min-h-screen bg-ivory-100', 'page-home' => $isHome, 'page-inner' => ! $isHome])>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-brand-700 focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white">
         Skip to content
     </a>
 
-    <x-site-header :transparent="$transparentHeader" />
+    <x-site-header :transparent="$isHome" />
 
-    <main id="main">
+    <main id="main" @class(['pt-0' => ! $isHome])>
         {{ $slot }}
     </main>
 
     <x-site-footer />
+
+    <x-reflection-modal />
 </body>
 </html>

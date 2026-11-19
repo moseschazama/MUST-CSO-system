@@ -31,9 +31,13 @@
             </a>
         </div>
 
-        <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div @class([
+            'mt-8 grid gap-4',
+            'md:grid-cols-2' => $events->count() > 1,
+            'xl:grid-cols-3' => $events->count() > 2,
+        ])>
             @forelse ($events as $event)
-                <x-event-card :event="$event" />
+                <x-event-card :event="$event" :wide="$events->count() === 1" />
             @empty
                 <p class="text-sm text-ink-500">No upcoming events have been announced.</p>
             @endforelse

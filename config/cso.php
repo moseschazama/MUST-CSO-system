@@ -32,10 +32,30 @@ return [
         'vision' => 'A vibrant Catholic student community that is the light of faith, hope and charity at MUST and in the wider Malawian society.',
         // SAMPLE — replace with the real founding year.
         'founded' => 2015,
-        'logo' => null, // e.g. '/images/cso-logo.png'
+        'logo' => '/images/cso-logo.png',
         // SAMPLE — replace with the link to a short Holy Mass highlight clip.
         // Keep this null until you have a hosted video; the hero highlight then stays hidden.
         'hero_video' => null,
+        // Exact TikTok video post URL (must end in /video/...) for the featured player on Activities.
+        'featured_tiktok_url' => null,
+    ],
+
+    // ---------------------------------------------------------------------
+    // Media fallbacks
+    // ---------------------------------------------------------------------
+    // Used when an activity, event or article has no uploaded photograph yet,
+    // so media-first cards never render as empty grey blocks.
+    'media_fallbacks' => [
+        '/images/gallery/12usmszhcdLinTYwV3RjQD3rObfSgeLQL.jpg',
+        '/images/gallery/1I83BoNPnpOozJx7-iXThQOkPn8sr4xuV.jpg',
+        '/images/gallery/1WS1K0jiEOHhCE-uwy2xagCFEUzHwRVn3.jpg',
+        '/images/gallery/1Pt2sQzEhFcWA6VP962TRptoVSN5J-qBP.jpg',
+        '/images/gallery/1HwaaaeG7vkZBJTMW4tLkPRgazSqq5A3g.jpg',
+        '/images/gallery/1bdmVvE8P672fSMjPOwR9Uq08nZpL2B2b.jpg',
+        '/images/gallery/10YvZrv8fIpp3UXPudDo4tuAo_B9z6_OZ.jpg',
+        '/images/gallery/1cZpO3y2_w0rt0QekenHkzvMzf4K5XFu6.jpg',
+        '/images/gallery/1oedIYxnEIYKQZX_SaZS19RYmnrty67V4.jpg',
+        '/images/gallery/17rtTWn0HMsfeOBuUTX0v2HmNkNdm3CwH.jpg',
     ],
 
     // ---------------------------------------------------------------------
@@ -52,15 +72,14 @@ return [
     ],
 
     // ---------------------------------------------------------------------
-    // Social platforms — set url to null to hide a platform
+    // Social platforms — centralized links for the footer icons.
+    // Set url to null until the official link is ready (icons stay visible but non-navigating).
     // ---------------------------------------------------------------------
     'socials' => [
-        ['label' => 'WhatsApp Channel', 'icon' => 'message-circle', 'url' => null, 'handle' => 'CSO WhatsApp Channel'],
-        ['label' => 'WhatsApp Group', 'icon' => 'message-circle', 'url' => null, 'handle' => 'CSO Members Group'],
-        ['label' => 'Facebook', 'icon' => 'facebook', 'url' => null, 'handle' => '@MUSTCSO'],
-        ['label' => 'Instagram', 'icon' => 'instagram', 'url' => null, 'handle' => '@must_cso'],
-        ['label' => 'YouTube', 'icon' => 'youtube', 'url' => null, 'handle' => 'MUST CSO'],
-        ['label' => 'TikTok', 'icon' => 'music', 'url' => null, 'handle' => '@mustcso'],
+        ['key' => 'facebook', 'label' => 'Facebook', 'url' => null],
+        ['key' => 'x', 'label' => 'X (Twitter)', 'url' => null],
+        ['key' => 'instagram', 'label' => 'Instagram', 'url' => null],
+        ['key' => 'tiktok', 'label' => 'TikTok', 'url' => 'https://www.tiktok.com/@must.cso'],
     ],
 
     // ---------------------------------------------------------------------
@@ -165,17 +184,79 @@ return [
     ],
 
     // ---------------------------------------------------------------------
+    // Academic structure (used by the membership form)
+    // Source: the four MUST schools and their published programmes.
+    // ---------------------------------------------------------------------
+    'academic' => [
+        'years' => ['1' => 'Year 1', '2' => 'Year 2', '3' => 'Year 3', '4' => 'Year 4', '5' => 'Year 5', '6' => 'Year 6'],
+        'schools' => [
+            'mit' => [
+                'label' => 'Malawi Institute of Technology (MIT)',
+                'departments' => ['Applied Studies', 'Computer Studies & Information Technology', 'Engineering'],
+                'programmes' => [
+                    'BEng (Hons) Biomedical Engineering',
+                    'BEng (Hons) Chemical Engineering',
+                    'BEng (Hons) Manufacturing Engineering',
+                    'BEng (Hons) Metallurgy and Materials Engineering',
+                    'BEng (Hons) Polymer and Textile Engineering',
+                    'BSc Computer Systems and Security',
+                    'BSc Business Information Technology',
+                    'BSc Sciences Education',
+                    'BSc Food Science and Technology',
+                    'BSc Mathematical Sciences',
+                ],
+            ],
+            'ams' => [
+                'label' => 'Academy of Medical Sciences (AMS)',
+                'departments' => ['Clinical Sciences', 'Biological Sciences'],
+                'programmes' => [
+                    'BSc Medical Microbiology',
+                    'BSc Immunology',
+                    'BSc Medical Imaging (Diagnostic Radiography)',
+                    'BSc Medical Imaging (Diagnostic Ultrasound)',
+                    'BSc Sport Science',
+                ],
+            ],
+            'nsces' => [
+                'label' => 'Ndata School of Climate and Earth Sciences (NSCES)',
+                'departments' => ['Climate Sciences', 'Water Resources Management', 'Energy Resources', 'Earth Sciences'],
+                'programmes' => [
+                    'BEng (Hons) Sustainable Energy Engineering',
+                    'BSc Meteorology and Climate Science',
+                    'BSc Earth Science (Geology)',
+                    'BSc Disaster Risk Management',
+                    'BSc Geo-Sciences (Earth Observation)',
+                    'BSc Petroleum Geo-Science (Oil and Gas)',
+                    'BSc Water Quality Management',
+                ],
+            ],
+            'bisch' => [
+                'label' => 'Bingu School of Culture and Heritage (BISCH)',
+                'departments' => ['Indigenous Knowledge Systems and Practices', 'Language and Communication', 'African Musicology'],
+                'programmes' => [
+                    'BA African Musicology',
+                    'BA Indigenous Knowledge Systems and Practice',
+                    'BA Language, Communication and Culture',
+                    'BA Cultural Economy',
+                    'BA Language Education',
+                    'BA Archiving and Records Management',
+                ],
+            ],
+        ],
+    ],
+
+    // ---------------------------------------------------------------------
     // Patron saint spotlight
     // SAMPLE — replace with the real patron saint of MUST CSO.
     // ---------------------------------------------------------------------
     'patron_saint' => [
-        'name' => 'St. Aloysius Gonzaga',
+        'name' => 'St. Thomas Aquinas',
         'title' => 'Patron of Students and Christian Youth',
-        'feast_day' => '21 June',
+        'feast_day' => '28 January',
         'image' => null,
-        'bio' => 'Born into an Italian noble family in 1568, Aloysius gave up his inheritance to join the Society of Jesus. He served the sick during the plague in Rome and died at only 23, having already given himself completely to God. He is remembered for his purity, his discipline in study and his tender care for the poor.',
-        'inspiration' => 'Aloysius shows us that holiness is not reserved for the old: a student can be a saint in the lecture hall, the hostel and the chapel.',
-        'quote' => 'He who wishes to love God must learn to keep his heart free for God alone.',
+        'bio' => 'Born in 1225, Thomas Aquinas studied at the University of Naples and taught at the University of Paris and Rome, becoming the Church\'s greatest theologian. He is remembered for his deep study, his teaching of the faith and his love for God and neighbour.',
+        'inspiration' => 'Thomas shows us that faith is learned through study, prayer and practice, and that holiness is available to every student who seeks God with all their heart.',
+        'quote' => 'God is the source of all goodness, and to love Him is to love Him alone and our neighbour as ourselves.',
     ],
 
     // ---------------------------------------------------------------------

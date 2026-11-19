@@ -1,0 +1,36 @@
+Locally hosted visual credits
+=============================
+
+All media in this directory is used under the Pexels Free License:
+https://www.pexels.com/license/
+
+Videos (1920x1080 MP4)
+----------------------
+- altar-stained-glass.mp4
+  "Stained Glasses Behind An Altar With An Open Holy Bible"
+  Creator: RDNE Stock project
+  Source: https://www.pexels.com/video/stained-glasses-behind-an-altar-with-an-open-holy-bible-8674333/
+  Poster: altar-stained-glass.jpg
+
+- bible-candle.mp4
+  "A Candle Beside an Open Bible"
+  Creator: Mikhail Nilov
+  Source: https://www.pexels.com/video/a-candle-beside-an-open-bible-8720691/
+  Poster: bible-candle.jpg (representative still from Pexels photo 9589377)
+
+- catholic-altar.mp4
+  "Catholic Altar"
+  Creator: MART PRODUCTION
+  Source: https://www.pexels.com/video/catholic-altar-7219436/
+  Poster: catholic-altar.jpg
+
+Photographs
+-----------
+- bible-candle.jpg: Pexels photo 9589377, cottonbro studio
+  https://www.pexels.com/photo/holy-bible-on-a-wooden-podium-in-close-up-view-9589377/
+- rosary-bible.jpg: Pexels photo 8675090, RDNE Stock project
+  https://www.pexels.com/photo/holy-book-with-rosary-on-brown-wooden-table-8675090/
+- crucifix.jpg: Pexels photo 9586360, cottonbro studio
+  https://www.pexels.com/photo/a-wooden-crucifix-in-a-church-9586360/
+- sunlit-altar.jpg: Pexels photo 29055910, Gundula Vogel
+  https://www.pexels.com/photo/ornate-church-altar-with-candles-and-crucifix-29055910/

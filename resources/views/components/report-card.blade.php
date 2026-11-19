@@ -1,13 +1,18 @@
 @props(['report'])
 
 <article class="card card-hover flex h-full flex-col overflow-hidden">
-    @if ($report->cover_image)
+    @if ($report->cover_image_url)
         <div class="relative aspect-[16/9] overflow-hidden bg-slate-100">
             <img
-                src="https://drive.google.com/thumbnail?id={{ $report->cover_image }}&sz=w1000"
+                src="{{ $report->cover_image_url }}"
                 alt="{{ $report->title }}"
                 loading="lazy"
-                class="h-full w-full object-cover transition duration-500 hover:scale-105"
+                @class([
+                    'h-full w-full object-cover transition duration-500',
+                    'hover:scale-105' => request()->routeIs('home'),
+                    'hover:scale-[1.02]' => ! request()->routeIs('home'),
+                ])
+                style="object-position: center 22%;"
             >
             <span class="absolute top-3 left-3 rounded-full bg-ink-900/80 px-3 py-1 text-[11px] font-bold text-white backdrop-blur">
                 {{ $report->activity_date->format('j M Y') }}
@@ -36,15 +41,12 @@
             </details>
         @endif
 
-        <div class="mt-5 flex flex-wrap gap-2 pt-1">
-            @if ($report->drive_url)
-                <a href="{{ $report->drive_url }}" target="_blank" rel="noopener" class="btn-ghost btn-sm">
-                    <x-icon name="folder-open" class="h-4 w-4" />
-                    Full report & photos
-                </a>
-            @else
-                <span class="chip">Report coming soon</span>
-            @endif
+        <div class="mt-auto flex flex-wrap gap-2 pt-5">
+            <a href="{{ route('documents.report', $report) }}" class="btn-primary btn-sm">
+                <x-icon name="download" class="h-4 w-4" />
+                Download PDF
+            </a>
+            <span class="chip self-center">{{ $report->activity_date->format('j M Y') }}</span>
         </div>
     </div>
 </article>

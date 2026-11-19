@@ -2,85 +2,101 @@
     $categoryCounts = $photos->countBy('category');
 @endphp
 
-<x-layouts.app title="Gallery" description="Photos from Holy Mass, devotions, meetings and other CSO activities, plus links to the full Google Drive albums.">
+<x-layouts.app title="Gallery" description="Photos from Holy Mass, devotions, meetings and other CSO activities.">
 
     <x-page-hero
         eyebrow="Gallery"
         title="Moments from our community."
-        description="Browse photos from Mass, devotions, meetings and outreach. Click any photo to view it larger, or open the full Google Drive albums."
+        description="Browse photos from Mass, devotions, meetings and outreach. Click any photo to view it larger."
+        image="/images/gallery/12usmszhcdLinTYwV3RjQD3rObfSgeLQL.jpg"
+        breadcrumbs="Gallery"
     />
 
-    {{-- ===== Albums / Drive cards ===== --}}
-    <section class="section container-page">
-        <div class="flex flex-wrap items-end justify-between gap-6">
-            <x-section-heading eyebrow="Google Drive media hub" title="Full albums & folders" />
-        </div>
-
-        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            @foreach ($albums as $album)
-                <a
-                    href="https://drive.google.com/drive/folders/{{ $album['folder_id'] }}"
-                    target="_blank"
-                    rel="noopener"
-                    class="card card-hover group flex flex-col p-6"
-                >
-                    <div class="flex items-center justify-between">
-                        <span class="icon-badge">
-                            <x-icon name="images" class="h-5 w-5" />
-                        </span>
-                        <x-icon name="arrow-up-right" class="h-4 w-4 text-ink-500 transition group-hover:text-brand-700" />
-                    </div>
-                    <h3 class="mt-4 text-base font-extrabold text-ink-900">{{ $album['label'] }}</h3>
-                    <p class="mt-1 text-sm text-ink-500">{{ $album['category'] }}</p>
-                    <div class="mt-4 flex items-center justify-between text-xs font-semibold">
-                        <span class="chip">
-                            <x-icon name="images" class="h-3 w-3" />
-                            {{ number_format($album['total']) }} photos
-                        </span>
-                        <span class="text-brand-700">Open folder</span>
-                    </div>
+    {{-- ===== Featured moments ===== --}}
+    @if ($featuredPhotos->isNotEmpty())
+        <section class="section container-page pb-0">
+            <div class="flex flex-wrap items-end justify-between gap-6">
+                <x-section-heading eyebrow="Featured moments" title="The CSO, alive and together." />
+                <a href="#gallery-grid" class="btn-ghost btn-sm">
+                    Browse all photos
+                    <x-icon name="arrow-right" class="h-4 w-4" />
                 </a>
-            @endforeach
+            </div>
 
-            @foreach (config('cso.drive.folders') as $folder)
-                @if ($folder['url'] && ! in_array($folder['key'], ['gallery']))
-                    <a
-                        href="{{ $folder['url'] }}"
-                        target="_blank"
-                        rel="noopener"
-                        class="card card-hover group flex flex-col p-6"
+            <div class="mt-8 grid auto-rows-[8rem] grid-cols-2 gap-3 sm:auto-rows-[10rem] lg:grid-cols-4 lg:auto-rows-[12rem]">
+                @foreach ($featuredPhotos as $photo)
+                    <button
+                        type="button"
+                        data-lightbox="{{ $photo->full_image }}"
+                        data-title="{{ $photo->title }}"
+                        data-alt="{{ $photo->alt }}"
+                        @class([
+                            'group relative overflow-hidden rounded-3xl bg-slate-100',
+                            'col-span-2 row-span-2' => $loop->first,
+                        ])
                     >
-                        <div class="flex items-center justify-between">
-                            <span class="icon-badge">
-                                <x-icon :name="$folder['icon']" class="h-5 w-5" />
-                            </span>
-                            <x-icon name="arrow-up-right" class="h-4 w-4 text-ink-500 transition group-hover:text-brand-700" />
+                        <img
+                            src="{{ $photo->thumbnail }}"
+                            alt="{{ $photo->alt }}"
+                            loading="lazy"
+                            class="h-full w-full object-cover transition duration-700 group-hover:scale-[1.02]"
+                            style="object-position: center 20%;"
+                        >
+                        <span class="media-shade"></span>
+                        <span class="absolute inset-x-0 bottom-0 p-4 text-left">
+                            <span class="media-badge">{{ $photo->category }}</span>
+                            <span class="mt-2 block text-sm font-extrabold text-white">{{ $photo->title }}</span>
+                        </span>
+                        <span class="absolute top-4 right-4 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-brand-800 opacity-0 shadow-lg transition group-hover:opacity-100">
+                            <x-icon name="images" class="h-4 w-4" />
+                        </span>
+                    </button>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
+    {{-- ===== Album previews ===== --}}
+    @if ($photoAlbums->isNotEmpty())
+        <section class="section container-page pb-0">
+            <div class="flex flex-wrap items-end justify-between gap-6">
+                <x-section-heading eyebrow="Albums" title="Step inside a gathering." />
+                <span class="chip"><x-icon name="images" class="h-3.5 w-3.5" /> {{ $photos->count() }} photos on the site</span>
+            </div>
+
+            <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                @foreach ($photoAlbums as $album)
+                    <a href="#gallery-grid" class="media-card group">
+                        <div class="album-mosaic aspect-[16/10] overflow-hidden">
+                            @foreach ($album['photos'] as $albumPhoto)
+                                <img
+                                    src="{{ $albumPhoto->thumbnail }}"
+                                    alt="{{ $albumPhoto->alt }}"
+                                    loading="lazy"
+                                    class="h-full w-full object-cover transition duration-700 group-hover:scale-[1.02]"
+                                    style="object-position: center 20%;"
+                                >
+                            @endforeach
                         </div>
-                        <h3 class="mt-4 text-base font-extrabold text-ink-900">{{ $folder['title'] }}</h3>
-                        <p class="mt-1 text-sm text-ink-500">{{ $folder['description'] }}</p>
-                        <span class="mt-4 text-xs font-bold text-brand-700">Open in Drive &rarr;</span>
+                        <div class="flex flex-1 flex-col p-5">
+                            <span class="eyebrow">{{ $album['category'] }}</span>
+                            <h3 class="mt-2 text-base font-extrabold text-ink-900">{{ $album['label'] }}</h3>
+                            <div class="mt-4 flex items-center justify-between text-xs font-bold">
+                                <span class="chip">{{ $album['count'] }} photos</span>
+                                <span class="inline-flex items-center gap-1.5 text-brand-700 transition group-hover:gap-2.5">
+                                    View album
+                                    <x-icon name="arrow-right" class="h-4 w-4" />
+                                </span>
+                            </div>
+                        </div>
                     </a>
-                @elseif (! $folder['url'])
-                    <div class="card flex flex-col p-6 opacity-60">
-                        <div class="flex items-center justify-between">
-                            <span class="icon-badge">
-                                <x-icon :name="$folder['icon']" class="h-5 w-5" />
-                            </span>
-                            <span class="chip">Coming soon</span>
-                        </div>
-                        <h3 class="mt-4 text-base font-extrabold text-ink-900">{{ $folder['title'] }}</h3>
-                        <p class="mt-1 text-sm text-ink-500">{{ $folder['description'] }}</p>
-                        <p class="mt-4 text-xs text-ink-500">
-                            Add the folder link in <code class="rounded bg-slate-100 px-1.5 py-0.5">config/cso.php</code>.
-                        </p>
-                    </div>
-                @endif
-            @endforeach
-        </div>
-    </section>
+                @endforeach
+            </div>
+        </section>
+    @endif
 
     {{-- ===== Filterable grid ===== --}}
-    <section class="section container-page bg-slate-50/60 sm:rounded-[2.5rem]">
+    <section id="gallery-grid" class="section container-page scroll-mt-28">
         <div data-filter-group>
             <div class="flex flex-wrap items-center gap-2">
                 <button type="button" data-filter="all" class="is-active inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold transition">
@@ -105,14 +121,14 @@
                         data-lightbox="{{ $photo->full_image }}"
                         data-title="{{ $photo->title }}"
                         data-alt="{{ $photo->alt }}"
-                        data-drive="{{ $photo->drive_url }}"
                         class="group relative aspect-square overflow-hidden rounded-2xl bg-slate-100"
                     >
                         <img
                             src="{{ $photo->thumbnail }}"
                             alt="{{ $photo->alt }}"
                             loading="lazy"
-                            class="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                            class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                            style="object-position: center 20%;"
                         >
                         <span class="absolute inset-0 bg-ink-900/0 transition group-hover:bg-ink-900/25"></span>
                         <span class="absolute bottom-2 left-2 rounded-full bg-ink-900/70 px-2 py-0.5 text-[10px] font-bold text-white opacity-0 backdrop-blur transition group-hover:opacity-100">
@@ -127,4 +143,5 @@
             </p>
         </div>
     </section>
+
 </x-layouts.app>

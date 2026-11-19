@@ -17,6 +17,14 @@
     />
 
     <section class="section container-page">
+        <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+            <p class="text-sm text-ink-500">Filter the schedule by the way you want to get involved.</p>
+            <a href="{{ route('documents.projects') }}" class="btn-ghost btn-sm">
+                <x-icon name="download" class="h-4 w-4" />
+                Download activities PDF
+            </a>
+        </div>
+
         <div data-tab-group>
             <div class="flex flex-wrap gap-2 rounded-2xl border border-slate-200/70 bg-slate-50/70 p-1.5">
                 @foreach ($tabs as $key => $tab)

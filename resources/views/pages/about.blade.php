@@ -9,6 +9,8 @@
         eyebrow="About MUST CSO"
         title="Rooted in faith, growing on campus."
         description="The story of a community of Catholic students at the Malawi University of Science and Technology — who we are, where we came from, and what we stand for."
+        image="/images/gallery/1uk98FIgaYIusBOCr9qGfhKRXmfgDkX7n.jpg"
+        breadcrumbs="About"
     />
 
     {{-- ===== Background & history ===== --}}
@@ -59,6 +61,7 @@
                             alt="CSO members in a campus gathering"
                             loading="lazy"
                             class="h-full w-full object-cover"
+                            style="object-position: center 20%;"
                         >
                     </div>
                     <div class="p-6">

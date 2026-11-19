@@ -1,0 +1,28 @@
+Locally hosted visual credits
+=============================
+
+All media in this directory is used under the Pexels Free License:
+https://www.pexels.com/license/
+
+Photographs are optimized to 1920px width from the Pexels CDN and used as the
+rotating cinematic background of the homepage hero.
+
+- congregation-prayer.jpg
+  "People in a Church Standing and Praying"
+  Creator: Luis Quintero
+  Source: https://www.pexels.com/photo/people-in-a-church-standing-and-praying-17026873/
+
+- altar-servers-mass.jpg
+  "Priest and Altar Servers Performing Christian Ceremony in Church"
+  Creator: Huynh Van
+  Source: https://www.pexels.com/photo/priest-and-altar-servers-performing-christian-ceremony-in-church-8582696/
+
+- catholic-mass.jpg
+  "Catholic Mass Ceremony in a Church Interior"
+  Creator: Huy Nguyen
+  Source: https://www.pexels.com/photo/catholic-mass-ceremony-in-a-church-interior-33755531/
+
+- ornate-mass-altar.jpg
+  "Catholic Mass Ceremony Inside Ornate Church"
+  Creator: Nguyen Tien Thinh
+  Source: https://www.pexels.com/photo/catholic-mass-ceremony-inside-ornate-church-38274944/

@@ -1,4 +1,8 @@
-@import 'tailwindcss';
+﻿@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
 
 /* ---------------------------------------------------------------------------
    Design tokens — MUST CSO (blue, Marian) palette.
@@ -28,6 +32,16 @@
     --color-ink-700: #1e293b;
     --color-ink-900: #0f172a;
 
+    --color-ivory-50: #fdfcf9;
+    --color-ivory-100: #faf7f1;
+    --color-ivory-200: #f3ece1;
+
+    --color-burgundy-500: #8a3a46;
+    --color-burgundy-600: #7a2e3b;
+    --color-burgundy-700: #642530;
+
+    --color-mist-300: #c9d6e2;
+
     --radius-4xl: 2rem;
     --radius-5xl: 2.75rem;
 }
@@ -39,7 +53,7 @@
     }
 
     body {
-        @apply bg-white text-ink-700 antialiased;
+        @apply bg-ivory-100 text-ink-700 antialiased;
         font-family: var(--font-sans);
     }
 
@@ -135,6 +149,33 @@
         @apply text-ink-500 text-lg leading-relaxed;
     }
 
+    /* ---- Forms ---- */
+    .field-label {
+        @apply mb-2 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase;
+    }
+
+    .field-input,
+    .field-select,
+    .field-textarea {
+        @apply w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink-900 shadow-sm transition placeholder:text-slate-400 hover:border-slate-300 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 focus:outline-none;
+    }
+
+    .field-select {
+        @apply appearance-none bg-no-repeat pr-10;
+    }
+
+    .field-hint {
+        @apply mt-1.5 text-xs text-ink-500;
+    }
+
+    .field-error {
+        @apply mt-1.5 text-xs font-semibold text-red-600;
+    }
+
+    .choice-card {
+        @apply flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-brand-300 has-checked:border-brand-500 has-checked:bg-brand-50/60;
+    }
+
     .chip {
         @apply inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-ink-500;
     }
@@ -160,43 +201,1120 @@
         @apply bg-brand-50 text-brand-800 shadow-sm ring-1 ring-brand-200;
     }
 
+    .site-header-bar {
+        @apply border border-slate-200/70 bg-white/95 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(15,23,42,.12)] transition-all duration-300;
+    }
+
+    .site-header-bar:hover {
+        @apply shadow-[0_14px_38px_-16px_rgba(15,23,42,.18)];
+    }
+
+    .social-brand-link {
+        @apply grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/5 transition duration-200 hover:-translate-y-0.5 hover:scale-105 hover:border-white/20 hover:bg-white/10 hover:shadow-[0_12px_28px_-14px_rgba(59,130,246,.55)];
+    }
+
+    .social-brand-link.is-unset {
+        @apply cursor-default opacity-45 hover:translate-y-0 hover:scale-100 hover:border-white/10 hover:bg-white/5 hover:shadow-none;
+    }
+
     /* ---- Decorative background glows ---- */
     .glow {
         @apply pointer-events-none absolute -z-10 rounded-full blur-3xl;
     }
+
+    /* -------------------------------------------------------------------
+       Homepage — hero dissolving into the activities section
+    ------------------------------------------------------------------- */
+    .hero-fade {
+        position: relative;
+        z-index: 2;
+        height: clamp(220px, 32vh, 420px);
+        pointer-events: none;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        background-image:
+            radial-gradient(
+                95% 75% at 50% 106%,
+                rgba(255, 255, 255, 0.5) 0%,
+                rgba(250, 247, 241, 0.28) 38%,
+                rgba(250, 247, 241, 0) 70%
+            ),
+            radial-gradient(
+                70% 65% at 14% 94%,
+                rgba(122, 46, 59, 0.1) 0%,
+                rgba(122, 46, 59, 0) 64%
+            ),
+            radial-gradient(
+                65% 60% at 88% 92%,
+                rgba(201, 155, 38, 0.08) 0%,
+                rgba(201, 155, 38, 0) 64%
+            ),
+            linear-gradient(
+                to bottom,
+                rgba(250, 247, 241, 0) 0%,
+                rgba(250, 247, 241, 0.06) 16%,
+                rgba(250, 247, 241, 0.2) 34%,
+                rgba(250, 247, 241, 0.46) 54%,
+                rgba(250, 247, 241, 0.74) 72%,
+                rgba(250, 247, 241, 0.92) 86%,
+            #faf7f1 100%
+        );
+    }
+
+    .hero-fade-blur {
+        position: absolute;
+        inset: -20px;
+        background: linear-gradient(
+            to bottom,
+            rgba(250, 247, 241, 0) 0%,
+            rgba(250, 247, 241, 0.62) 52%,
+            #faf7f1 100%
+        );
+        filter: blur(18px);
+    }
+
+    /* -------------------------------------------------------------------
+       Homepage — floating photographic cards around the central message
+    ------------------------------------------------------------------- */
+    .community-photo {
+        @apply relative overflow-hidden rounded-[1.35rem] bg-white/70 ring-1 ring-white/70;
+        box-shadow:
+            0 30px 60px -30px rgba(15, 23, 42, 0.55),
+            0 8px 22px -14px rgba(15, 23, 42, 0.28);
+    }
+
+    .community-photo img {
+        @apply h-full w-full object-cover;
+    }
+
+    .community-photo-caption {
+        @apply absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-900/85 via-ink-900/30 to-transparent px-3.5 pt-10 pb-3.5;
+    }
+
+    .community-photo-caption span {
+        @apply text-[11px] font-extrabold tracking-tight text-white sm:text-xs;
+    }
+
+    .community-float {
+        animation: community-float 7s ease-in-out infinite;
+        will-change: transform;
+    }
+
+    @keyframes community-float {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-9px);
+        }
+    }
+
+    /* -------------------------------------------------------------------
+       Media-first content cards (activities, events, news, gallery)
+    ------------------------------------------------------------------- */
+    .media-card {
+        @apply relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200/70 bg-white shadow-[0_1px_2px_rgba(15,23,42,.04),0_14px_34px_-16px_rgba(15,23,42,.16)] transition duration-500;
+    }
+
+    .media-card:hover {
+        @apply -translate-y-1 border-brand-200 shadow-[0_2px_6px_rgba(15,23,42,.05),0_30px_60px_-26px_rgba(36,81,166,.4)];
+    }
+
+    .media-frame {
+        @apply relative overflow-hidden bg-slate-200;
+    }
+
+    .media-frame > img {
+        @apply h-full w-full object-cover;
+        transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .group:hover .media-frame > img,
+    .media-card:hover .media-frame > img {
+        transform: scale(1.03);
+    }
+
+    .page-inner .group:hover .media-frame > img,
+    .page-inner .media-card:hover .media-frame > img {
+        transform: scale(1.02);
+    }
+
+    .page-home main,
+    .page-inner main {
+        padding-top: 0;
+        margin-top: 0;
+    }
+
+    /* Heroes are full-bleed: they must start at the very top of the page so the
+       floating header overlaps the photograph instead of a white strip. */
+    .page-home main > :first-child,
+    .page-inner main > :first-child,
+    .page-inner .page-hero {
+        margin-top: 0 !important;
+    }
+
+    .media-shade {
+        @apply pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-900/90 via-ink-900/25 to-transparent;
+    }
+
+    .media-badge {
+        @apply inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-ink-900/45 px-3 py-1 text-[10px] font-bold tracking-[0.14em] text-white uppercase backdrop-blur-md;
+    }
+
+    .media-badge-gold {
+        @apply border-gold-300/60 bg-gold-500/85 text-white;
+    }
+
+    .media-play {
+        @apply absolute inset-0 z-10 grid place-items-center;
+    }
+
+    .media-play-btn {
+        @apply relative grid h-16 w-16 place-items-center rounded-full bg-white/95 text-brand-800 shadow-[0_18px_40px_-12px_rgba(15,23,42,.65)] transition duration-300 sm:h-20 sm:w-20;
+    }
+
+    .media-play:hover .media-play-btn {
+        @apply scale-105 bg-white text-brand-700;
+    }
+
+    .media-play-ring {
+        @apply absolute inset-0 rounded-full border border-white/60;
+        animation: media-play-pulse 2.6s ease-out infinite;
+    }
+
+    @keyframes media-play-pulse {
+        0% {
+            transform: scale(1);
+            opacity: 0.7;
+        }
+        70%,
+        100% {
+            transform: scale(1.65);
+            opacity: 0;
+        }
+    }
+
+    .media-play-label {
+        @apply absolute inset-x-0 bottom-5 z-10 text-center text-[10px] font-bold tracking-[0.2em] text-white/90 uppercase drop-shadow;
+    }
+
+    .date-badge {
+        @apply flex h-14 w-14 flex-col items-center justify-center rounded-2xl border border-white/30 bg-white/95 text-ink-900 shadow-lg backdrop-blur;
+    }
+
+    .date-badge-day {
+        @apply text-lg leading-none font-extrabold;
+    }
+
+    .date-badge-month {
+        @apply mt-0.5 text-[9px] font-bold tracking-[0.16em] text-brand-700 uppercase;
+    }
+
+    .album-mosaic {
+        @apply grid grid-cols-2 gap-1;
+    }
+
+    .album-mosaic > *:first-child {
+        @apply col-span-2;
+    }
+
+    .video-modal {
+        @apply fixed inset-0 z-[60] hidden items-center justify-center bg-ink-900/95 p-4 backdrop-blur-md sm:p-8;
+    }
+
+    .video-modal.is-open {
+        @apply flex;
+    }
+
+    .video-modal-panel {
+        @apply relative w-full max-w-5xl overflow-hidden rounded-3xl bg-black shadow-[0_40px_100px_-30px_rgba(0,0,0,.9)] ring-1 ring-white/15;
+    }
+
+    .video-modal-stage {
+        @apply relative aspect-video w-full bg-black;
+    }
+
+    .video-modal-stage video {
+        @apply h-full w-full object-contain;
+    }
+
+    .video-loader {
+        @apply pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-ink-900/80 text-white transition duration-300;
+    }
+
+    .video-loader.is-hidden {
+        @apply pointer-events-none opacity-0;
+    }
+
+    .video-spinner {
+        @apply h-9 w-9 rounded-full border-2 border-white/25 border-t-white;
+        animation: video-spin 0.8s linear infinite;
+    }
+
+    @keyframes video-spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .faith-shell {
+        border: 1px solid rgba(236, 203, 116, 0.22);
+        background:
+            radial-gradient(circle at 8% 0%, rgba(58, 107, 201, 0.2), transparent 38%),
+            radial-gradient(circle at 92% 12%, rgba(201, 155, 38, 0.15), transparent 34%),
+            linear-gradient(135deg, #08152d 0%, #0b1d3c 52%, #07111f 100%);
+        box-shadow: 0 40px 90px -48px rgba(3, 9, 22, 0.9);
+    }
+
+    .faith-shell-glow {
+        position: absolute;
+        border-radius: 9999px;
+        filter: blur(70px);
+        pointer-events: none;
+    }
+
+    .faith-shell-glow--gold {
+        top: -9rem;
+        right: -5rem;
+        width: 24rem;
+        height: 24rem;
+        background: rgba(201, 155, 38, 0.16);
+    }
+
+    .faith-shell-glow--blue {
+        bottom: -12rem;
+        left: -6rem;
+        width: 28rem;
+        height: 28rem;
+        background: rgba(58, 107, 201, 0.17);
+    }
+
+    .faith-shell-rule {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.5;
+        background-image: linear-gradient(115deg, transparent 42%, rgba(236, 203, 116, 0.09) 50%, transparent 58%);
+        background-size: 220% 100%;
+    }
+
+    .faith-header .eyebrow {
+        color: var(--color-gold-300);
+    }
+
+    .faith-header h2 {
+        color: #fff;
+        letter-spacing: -0.035em;
+    }
+
+    .faith-header .lead {
+        max-width: 43rem;
+        color: rgba(226, 232, 240, 0.78);
+    }
+
+    .faith-get-involved {
+        border-color: rgba(236, 203, 116, 0.38);
+        background: rgba(236, 203, 116, 0.08);
+        color: #fff;
+    }
+
+    .faith-get-involved:hover {
+        border-color: rgba(236, 203, 116, 0.7);
+        background: rgba(236, 203, 116, 0.16);
+        color: #fff;
+    }
+
+    .faith-feature {
+        background: #07111f;
+        box-shadow: 0 32px 70px -34px rgba(1, 6, 17, 0.92);
+    }
+
+    .cinematic-media {
+        z-index: 0;
+        overflow: hidden;
+        background: #07111f;
+    }
+
+    .cinematic-poster,
+    .cinematic-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .cinematic-poster {
+        object-position: center;
+        transform: scale(1.04);
+        animation: cinematic-drift 26s ease-in-out infinite alternate;
+    }
+
+    .cinematic-video {
+        opacity: 0;
+        object-position: center;
+        transform: scale(1.025);
+        transition: opacity 1200ms ease;
+    }
+
+    .cinematic-video.is-playing {
+        opacity: 1;
+    }
+
+    .home-hero-media .cinematic-poster {
+        opacity: 0;
+        filter: blur(8px) saturate(0.92);
+        animation-name: home-hero-drift;
+        transition:
+            opacity 2200ms cubic-bezier(0.4, 0, 0.2, 1),
+            filter 2200ms cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: opacity, transform, filter;
+    }
+
+    .home-hero-media .cinematic-poster.is-active {
+        opacity: 1;
+        filter: blur(0) saturate(1);
+    }
+
+    .home-hero-media .cinematic-poster:nth-child(2) {
+        animation-duration: 22s;
+        animation-direction: alternate-reverse;
+        animation-delay: -6s;
+    }
+
+    .home-hero-media .cinematic-poster:nth-child(3) {
+        animation-duration: 24s;
+        animation-delay: -11s;
+    }
+
+    .home-hero-media .cinematic-poster:nth-child(4) {
+        animation-duration: 20s;
+        animation-direction: alternate-reverse;
+        animation-delay: -15s;
+    }
+
+    .cinematic-scrim {
+        z-index: 1;
+        pointer-events: none;
+        background:
+            linear-gradient(90deg, rgba(5, 13, 29, 0.95) 0%, rgba(7, 20, 43, 0.84) 48%, rgba(7, 20, 43, 0.5) 100%),
+            linear-gradient(to top, rgba(4, 10, 24, 0.88) 0%, rgba(7, 20, 43, 0.15) 55%, rgba(4, 10, 24, 0.4) 100%);
+    }
+
+    .cinematic-shimmer {
+        z-index: 2;
+        pointer-events: none;
+        opacity: 0.45;
+        mix-blend-mode: screen;
+        background: radial-gradient(ellipse at 70% 18%, rgba(236, 203, 116, 0.3), transparent 45%);
+        animation: cinematic-light 18s ease-in-out infinite alternate;
+    }
+
+    .cinematic-edge {
+        z-index: 3;
+        border-radius: inherit;
+        border: 1px solid rgba(236, 203, 116, 0.22);
+        box-shadow: inset 0 0 90px rgba(2, 8, 20, 0.45);
+        pointer-events: none;
+    }
+
+    @keyframes cinematic-drift {
+        from {
+            transform: scale(1.04) translate3d(0, 0, 0);
+        }
+        to {
+            transform: scale(1.1) translate3d(-1.5%, -1%, 0);
+        }
+    }
+
+    @keyframes home-hero-drift {
+        from {
+            transform: scale(1.06) translate3d(0, 0, 0);
+        }
+        to {
+            transform: scale(1.16) translate3d(-3%, -1.5%, 0);
+        }
+    }
+
+    @keyframes cinematic-light {
+        from {
+            opacity: 0.28;
+            transform: translate3d(-4%, 0, 0);
+        }
+        to {
+            opacity: 0.55;
+            transform: translate3d(4%, 1%, 0);
+        }
+    }
+
+    @keyframes home-hero-light {
+        from {
+            opacity: 0.12;
+            transform: translate3d(-3%, 0, 0);
+        }
+        to {
+            opacity: 0.24;
+            transform: translate3d(3%, 1%, 0);
+        }
+    }
+
+    .faith-kicker {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+    }
+
+    .faith-kicker-icon {
+        display: grid;
+        width: 2.4rem;
+        height: 2.4rem;
+        place-items: center;
+        border-radius: 0.8rem;
+        border: 1px solid rgba(236, 203, 116, 0.42);
+        background: rgba(236, 203, 116, 0.12);
+        color: var(--color-gold-300);
+        backdrop-filter: blur(8px);
+    }
+
+    .faith-kicker p {
+        color: var(--color-gold-300);
+        font-size: 0.625rem;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+    }
+
+    .faith-date {
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.09);
+        padding: 0.4rem 0.8rem;
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 0.625rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        backdrop-filter: blur(8px);
+    }
+
+    .faith-title-rule {
+        display: block;
+        width: 3.25rem;
+        height: 2px;
+        margin-bottom: 1.4rem;
+        border-radius: 9999px;
+        background: linear-gradient(90deg, var(--color-gold-300), rgba(236, 203, 116, 0));
+    }
+
+    .faith-title {
+        color: #fff;
+        text-shadow: 0 2px 24px rgba(1, 6, 17, 0.55);
+    }
+
+    .faith-liturgy {
+        color: var(--color-gold-300);
+    }
+
+    .faith-excerpt {
+        color: rgba(226, 232, 240, 0.92);
+        text-shadow: 0 1px 12px rgba(1, 6, 17, 0.5);
+    }
+
+    .faith-source {
+        color: rgba(255, 255, 255, 0.62);
+    }
+
+    .faith-fallback {
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        color: #f1f5f9;
+        backdrop-filter: blur(10px);
+    }
+
+    .faith-primary-button,
+    .faith-secondary-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border-radius: 9999px;
+        font-weight: 800;
+        transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .faith-primary-button {
+        border: 1px solid rgba(236, 203, 116, 0.65);
+        background: linear-gradient(135deg, #c99b26, #a67c1a);
+        padding: 0.85rem 1.35rem;
+        color: #fff;
+        font-size: 0.875rem;
+        box-shadow: 0 16px 34px -16px rgba(201, 155, 38, 0.9);
+    }
+
+    .faith-primary-button:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(135deg, #dcb44a, #b78a1e);
+        box-shadow: 0 20px 40px -16px rgba(201, 155, 38, 0.95);
+    }
+
+    .faith-secondary-button {
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 0.8rem 1.1rem;
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .faith-secondary-button:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+    }
+
+    .faith-action-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(15, 23, 42, 0.07);
+        border-radius: 1.25rem;
+        background: linear-gradient(145deg, #fff 0%, #fdfbf7 100%);
+        box-shadow: 0 18px 40px -28px rgba(5, 13, 29, 0.6);
+        transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+    }
+
+    .faith-action-card::before {
+        content: '';
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 3px;
+        transform: scaleY(0.35);
+        transform-origin: top;
+        background: linear-gradient(to bottom, var(--color-gold-300), rgba(201, 155, 38, 0.1));
+        transition: transform 300ms ease;
+    }
+
+    .faith-action-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(201, 155, 38, 0.38);
+        box-shadow: 0 24px 48px -28px rgba(5, 13, 29, 0.55);
+    }
+
+    .faith-action-card:hover::before {
+        transform: scaleY(1);
+    }
+
+    .faith-action-icon {
+        display: grid;
+        width: 3rem;
+        height: 3rem;
+        flex-shrink: 0;
+        place-items: center;
+        border-radius: 0.85rem;
+        transition: transform 300ms ease;
+    }
+
+    .faith-action-card:hover .faith-action-icon {
+        transform: translateY(-2px);
+    }
+
+    .faith-action-icon--blue {
+        background: var(--color-brand-50);
+        color: var(--color-brand-700);
+        box-shadow: inset 0 0 0 1px var(--color-brand-100);
+    }
+
+    .faith-action-icon--gold {
+        background: var(--color-gold-100);
+        color: var(--color-gold-600);
+        box-shadow: inset 0 0 0 1px rgba(201, 155, 38, 0.35);
+    }
+
+    .faith-action-icon--emerald {
+        background: #ecfdf5;
+        color: #047857;
+        box-shadow: inset 0 0 0 1px #d1fae5;
+    }
+
+    .faith-action-title {
+        color: var(--color-ink-900);
+    }
+
+    .faith-action-copy {
+        color: var(--color-ink-500);
+    }
+
+    .faith-action-arrow {
+        color: var(--color-gold-600);
+        transition: transform 300ms ease;
+    }
+
+    .faith-action-card:hover .faith-action-arrow {
+        transform: translateX(4px);
+    }
+
+    .faith-footnote {
+        color: rgba(226, 232, 240, 0.7);
+    }
+
+    .faith-footnote-link {
+        color: var(--color-gold-300);
+        font-weight: 800;
+    }
+
+    .faith-footnote-link:hover {
+        color: #fff;
+    }
+
+    .daily-hero {
+        background: #07111f;
+    }
+
+    .hero-glow {
+        z-index: 2;
+        border-radius: 9999px;
+        pointer-events: none;
+        filter: blur(64px);
+    }
+
+    .hero-glow--brand {
+        top: -5rem;
+        right: -5rem;
+        width: 18rem;
+        height: 18rem;
+        background: rgba(95, 132, 203, 0.2);
+    }
+
+    .hero-glow--gold {
+        bottom: -4rem;
+        left: 33%;
+        width: 14rem;
+        height: 14rem;
+        background: rgba(201, 155, 38, 0.1);
+    }
+
+    .hero-stage h1 {
+        text-shadow: 0 3px 24px rgba(1, 6, 17, 0.55);
+    }
+
+    .hero-stage .cinematic-shimmer {
+        opacity: 0.18;
+        animation-name: home-hero-light;
+    }
+
+    .hero-stage .cinematic-edge {
+        box-shadow: inset 0 0 60px rgba(2, 8, 20, 0.28);
+    }
+
+    .daily-hero-scrim {
+        background:
+            linear-gradient(90deg, rgba(5, 13, 29, 0.95) 0%, rgba(7, 20, 43, 0.84) 48%, rgba(7, 20, 43, 0.48) 100%),
+            linear-gradient(to top, rgba(4, 10, 24, 0.82) 0%, rgba(7, 20, 43, 0.12) 58%, rgba(4, 10, 24, 0.38) 100%);
+    }
+
+    .daily-crumbs {
+        color: rgba(255, 255, 255, 0.65);
+    }
+
+    .daily-crumbs a:hover {
+        color: #fff;
+    }
+
+    .daily-hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.4rem 1rem;
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 0.625rem;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        backdrop-filter: blur(8px);
+    }
+
+    .daily-hero-title {
+        color: #fff;
+        text-shadow: 0 3px 30px rgba(1, 6, 17, 0.6);
+    }
+
+    .daily-hero-copy {
+        color: rgba(226, 232, 240, 0.84);
+        text-shadow: 0 1px 14px rgba(1, 6, 17, 0.5);
+    }
+
+    .daily-feature-scrim {
+        background:
+            linear-gradient(to top, rgba(4, 10, 24, 0.82) 0%, rgba(7, 20, 43, 0.18) 70%, rgba(4, 10, 24, 0.36) 100%),
+            linear-gradient(90deg, rgba(5, 13, 29, 0.42), transparent 70%);
+    }
+
+    .daily-feature-symbol {
+        display: grid;
+        width: 3.5rem;
+        height: 3.5rem;
+        place-items: center;
+        border: 1px solid rgba(236, 203, 116, 0.55);
+        border-radius: 1.1rem;
+        background: rgba(236, 203, 116, 0.14);
+        color: var(--color-gold-300);
+        backdrop-filter: blur(10px);
+    }
+
+    .daily-feature-body {
+        background: linear-gradient(150deg, #fff 0%, #fdfbf7 100%);
+    }
+
+    .daily-feature-label {
+        color: var(--color-gold-600);
+        font-size: 0.625rem;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+    }
+
+    .daily-feature-date {
+        color: var(--color-brand-700);
+    }
+
+    .daily-feature-title {
+        color: var(--color-ink-900);
+    }
+
+    .daily-feature-liturgy {
+        color: var(--color-gold-700);
+    }
+
+    .daily-feature-excerpt {
+        color: var(--color-ink-600);
+    }
+
+    .daily-primary-button,
+    .daily-source-button,
+    .daily-prayer-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border-radius: 9999px;
+        font-weight: 800;
+        transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
+    }
+
+    .daily-primary-button {
+        border: 1px solid rgba(236, 203, 116, 0.62);
+        background: linear-gradient(135deg, #c99b26, #a67c1a);
+        padding: 0.85rem 1.35rem;
+        color: #fff;
+        font-size: 0.875rem;
+        box-shadow: 0 16px 34px -16px rgba(201, 155, 38, 0.85);
+    }
+
+    .daily-primary-button:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(135deg, #dcb44a, #b78a1e);
+        box-shadow: 0 20px 40px -16px rgba(201, 155, 38, 0.95);
+    }
+
+    .daily-primary-button--compact {
+        padding: 0.6rem 1.1rem;
+        font-size: 0.75rem;
+    }
+
+    .daily-source-button {
+        border: 1px solid var(--color-slate-200, #e2e8f0);
+        background: rgba(255, 255, 255, 0.85);
+        padding: 0.6rem 1.1rem;
+        color: var(--color-brand-800);
+        font-size: 0.75rem;
+    }
+
+    .daily-source-button:hover {
+        transform: translateY(-2px);
+        border-color: rgba(201, 155, 38, 0.55);
+        background: #fff;
+    }
+
+    .daily-source {
+        color: var(--color-ink-500);
+    }
+
+    .daily-source a,
+    .daily-source-link {
+        color: var(--color-brand-700);
+    }
+
+    .daily-source a:hover,
+    .daily-source-link:hover {
+        color: var(--color-brand-800);
+    }
+
+    .daily-fallback-icon {
+        display: grid;
+        width: 3.5rem;
+        height: 3.5rem;
+        margin: 0 auto;
+        place-items: center;
+        border: 1px solid rgba(236, 203, 116, 0.45);
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--color-gold-300);
+        backdrop-filter: blur(8px);
+    }
+
+    .daily-fallback-panel {
+        border: 1px solid rgba(201, 155, 38, 0.35);
+        border-radius: 1rem;
+        background: linear-gradient(145deg, rgba(253, 243, 215, 0.75), rgba(255, 255, 255, 0.9));
+    }
+
+    .daily-practice-card {
+        overflow: hidden;
+        border: 1px solid rgba(15, 23, 42, 0.07);
+        border-radius: 1.5rem;
+        background: linear-gradient(150deg, #fff 0%, #fdfbf7 100%);
+        box-shadow: 0 18px 40px -30px rgba(5, 13, 29, 0.55);
+        transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+    }
+
+    .daily-practice-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(201, 155, 38, 0.4);
+        box-shadow: 0 24px 48px -30px rgba(5, 13, 29, 0.55);
+    }
+
+    .daily-practice-image {
+        position: relative;
+        height: 8.5rem;
+        overflow: hidden;
+        background: var(--color-brand-950);
+    }
+
+    .daily-practice-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .daily-practice-card:hover .daily-practice-image img {
+        transform: scale(1.07);
+    }
+
+    .daily-practice-shade {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(7, 20, 43, 0.65), rgba(7, 20, 43, 0.08) 75%);
+    }
+
+    .daily-practice-icon {
+        position: absolute;
+        bottom: 1rem;
+        left: 1.5rem;
+        display: grid;
+        width: 2.6rem;
+        height: 2.6rem;
+        place-items: center;
+        border: 1px solid rgba(236, 203, 116, 0.5);
+        border-radius: 0.8rem;
+        background: rgba(5, 13, 29, 0.55);
+        color: var(--color-gold-300);
+        backdrop-filter: blur(8px);
+    }
+
+    .daily-practice-title {
+        color: var(--color-ink-900);
+    }
+
+    .daily-practice-copy {
+        color: var(--color-ink-500);
+    }
+
+    .daily-side-card {
+        border: 1px solid rgba(15, 23, 42, 0.07);
+        border-radius: 1.5rem;
+        background: linear-gradient(150deg, #fff 0%, #fdfbf7 100%);
+        box-shadow: 0 18px 40px -30px rgba(5, 13, 29, 0.5);
+    }
+
+    .daily-side-eyebrow {
+        color: var(--color-brand-700);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+    }
+
+    .daily-side-hint {
+        color: var(--color-ink-500);
+    }
+
+    .daily-date-link {
+        border-color: rgba(226, 232, 240, 0.9);
+        background: #fff;
+        color: var(--color-ink-900);
+    }
+
+    .daily-date-link:hover {
+        border-color: rgba(201, 155, 38, 0.45);
+        background: #fffdf8;
+    }
+
+    .daily-date-link--active {
+        border-color: rgba(201, 155, 38, 0.55);
+        background: linear-gradient(135deg, rgba(253, 243, 215, 0.85), #fff);
+        color: var(--color-ink-900);
+    }
+
+    .daily-date-sub {
+        color: var(--color-ink-500);
+    }
+
+    .daily-date-sub--found {
+        color: #047857;
+    }
+
+    .daily-date-link svg {
+        color: #94a3b8;
+    }
+
+    .daily-prayer-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(236, 203, 116, 0.24);
+        border-radius: 1.5rem;
+        background: linear-gradient(135deg, #08152d 0%, #0b1d3c 100%);
+        color: #fff;
+        box-shadow: 0 26px 54px -34px rgba(3, 9, 22, 0.9);
+    }
+
+    .daily-prayer-glow {
+        position: absolute;
+        top: -5rem;
+        right: -4rem;
+        width: 15rem;
+        height: 15rem;
+        border-radius: 9999px;
+        background: rgba(201, 155, 38, 0.16);
+        filter: blur(45px);
+        pointer-events: none;
+    }
+
+    .daily-prayer-title,
+    .daily-prayer-copy {
+        position: relative;
+    }
+
+    .daily-prayer-copy {
+        color: rgba(226, 232, 240, 0.75);
+    }
+
+    .daily-prayer-button {
+        position: relative;
+        border: 1px solid rgba(236, 203, 116, 0.6);
+        background: linear-gradient(135deg, #c99b26, #a67c1a);
+        padding: 0.7rem 1.1rem;
+        color: #fff;
+        font-size: 0.875rem;
+    }
+
+    .daily-prayer-button:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(135deg, #dcb44a, #b78a1e);
+    }
+
+    .community-atmosphere {
+        background-image:
+            linear-gradient(to bottom, #faf7f1 0%, rgba(250, 247, 241, 0) 18%),
+            radial-gradient(
+                44% 46% at 18% 30%,
+                rgba(58, 107, 201, 0.13) 0%,
+                rgba(58, 107, 201, 0.055) 40%,
+                rgba(58, 107, 201, 0) 72%
+            ),
+            radial-gradient(
+                48% 50% at 84% 22%,
+                rgba(122, 46, 59, 0.095) 0%,
+                rgba(122, 46, 59, 0.04) 42%,
+                rgba(122, 46, 59, 0) 74%
+            ),
+            radial-gradient(
+                54% 56% at 70% 82%,
+                rgba(201, 155, 38, 0.105) 0%,
+                rgba(201, 155, 38, 0.042) 44%,
+                rgba(201, 155, 38, 0) 76%
+            ),
+            radial-gradient(
+                50% 52% at 24% 84%,
+                rgba(159, 179, 200, 0.14) 0%,
+                rgba(159, 179, 200, 0.055) 42%,
+                rgba(159, 179, 200, 0) 74%
+            ),
+            radial-gradient(
+                78% 82% at 50% 48%,
+                rgba(255, 255, 255, 0.55) 0%,
+                rgba(255, 255, 255, 0.22) 48%,
+                rgba(255, 255, 255, 0) 80%
+            );
+        -webkit-mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            #000 10%,
+            #000 90%,
+            transparent 100%
+        );
+        mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            #000 10%,
+            #000 90%,
+            transparent 100%
+        );
+    }
 }
 
 @layer utilities {
-    /* Sticky header state (toggled by app.js) */
     #site-header.is-scrolled .site-header-bar {
-        @apply border-slate-200/70 bg-white/90 shadow-[0_10px_30px_-18px_rgba(15,23,42,.45)];
+        @apply border-slate-200/80 bg-white/98 shadow-[0_14px_36px_-18px_rgba(15,23,42,.28)];
     }
 
-    /* Transparent header over the dark hero (only when not scrolled) */
-    #site-header.is-transparent:not(.is-scrolled) .site-header-bar {
-        @apply border-white/15 bg-white/5 shadow-none;
-    }
-    #site-header.is-transparent:not(.is-scrolled) .header-brand-main,
-    #site-header.is-transparent:not(.is-scrolled) .header-brand-sub,
-    #site-header.is-transparent:not(.is-scrolled) .nav-link,
-    #site-header.is-transparent:not(.is-scrolled) .header-mobile-toggle,
-    #site-header.is-transparent:not(.is-scrolled) .site-header-bar span.text-ink-900 {
-        @apply text-white;
-    }
-    #site-header.is-transparent:not(.is-scrolled) .nav-link:hover {
-        @apply bg-white/10 text-white;
-    }
-    #site-header.is-transparent:not(.is-scrolled) .header-cta-ghost {
-        @apply border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white;
-    }
-    #site-header.is-transparent:not(.is-scrolled) .header-mobile-toggle {
-        @apply border-white/40 bg-white/10;
-    }
-    #site-header.is-transparent:not(.is-scrolled) .site-header-bar .text-brand-600 {
-        @apply text-brand-300;
+    #site-header {
+        transition: top 300ms ease;
     }
 
-    /* Active tab / filter chip. Selector specificity beats single utilities. */
+    #site-header.is-scrolled {
+        top: 0;
+    }
+
+    #site-header.site-header-transparent:not(.is-scrolled) .site-header-bar {
+        border-color: rgba(255, 255, 255, 0.24);
+        background: rgba(5, 13, 29, 0.2);
+        box-shadow: none;
+    }
+
+    #site-header.site-header-transparent:not(.is-scrolled) .site-header-bar .text-slate-900,
+    #site-header.site-header-transparent:not(.is-scrolled) .site-header-bar .text-slate-700,
+    #site-header.site-header-transparent:not(.is-scrolled) .site-header-bar .text-slate-600 {
+        color: #fff;
+    }
+
+    #site-header.site-header-transparent:not(.is-scrolled) .site-header-bar .text-brand-800 {
+        color: #fcd34d;
+    }
+
+    #site-header.site-header-transparent:not(.is-scrolled) .site-header-bar .border-slate-200,
+    #site-header.site-header-transparent:not(.is-scrolled) .site-header-bar .border-slate-200\/70 {
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    #site-header.site-header-transparent:not(.is-scrolled) .site-header-bar .bg-white {
+        background-color: rgba(255, 255, 255, 0.14);
+    }
+
     [data-tab].is-active,
     [data-filter].is-active {
         @apply border-ink-900 bg-ink-900 text-white shadow-sm;
@@ -210,7 +1328,6 @@
         text-wrap: balance;
     }
 
-    /* Infinite marquee (duplicated track, so it loops seamlessly) */
     .marquee-track {
         animation: marquee 38s linear infinite;
     }
@@ -236,29 +1353,25 @@
         scrollbar-width: none;
     }
 
-    /* Gentle floating motion for the "Every Student / One Community" photo cards */
-    .ec-float {
-        animation: ec-float 5.5s ease-in-out infinite;
-        will-change: transform;
-    }
-
-    @keyframes ec-float {
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-16px);
-        }
-    }
-
-    /* Scroll reveal */
     .reveal {
         opacity: 0;
         transform: translateY(18px);
         transition:
             opacity 0.7s ease,
             transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .no-scrollbar-snap {
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+    }
+
+    .no-scrollbar-snap::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar-snap > * {
+        scroll-snap-align: start;
     }
 
     .reveal.is-visible {
@@ -276,8 +1389,21 @@
         animation: none;
     }
 
-    .ec-float {
+    .community-float,
+    .media-play-ring,
+    .video-spinner,
+    .cinematic-poster,
+    .cinematic-shimmer {
         animation: none;
+    }
+
+    .cinematic-video {
+        display: none;
+    }
+
+    .home-hero-media .cinematic-poster {
+        transition: none;
+        filter: none;
     }
 
     .reveal {
@@ -286,3 +1412,78 @@
         transition: none;
     }
 }
+
+    .reflection-content {
+        color: var(--color-ink-700);
+        font-size: 0.975rem;
+        line-height: 1.8;
+    }
+
+    .reflection-content > * + * {
+        margin-top: 1rem;
+    }
+
+    .reflection-content h2,
+    .reflection-content h3,
+    .reflection-content h4 {
+        margin-top: 1.5rem;
+        color: var(--color-ink-900);
+        font-weight: 800;
+        line-height: 1.3;
+    }
+
+    .reflection-content p {
+        margin: 0 0 1rem;
+    }
+
+    .reflection-content strong {
+        color: var(--color-ink-900);
+        font-weight: 700;
+    }
+
+    .reflection-content em {
+        color: inherit;
+    }
+
+    .reflection-content a {
+        color: var(--color-brand-700);
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    .reflection-content a:hover {
+        color: var(--color-brand-800);
+    }
+
+    .reflection-content img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 1.25rem auto;
+        border-radius: 1rem;
+    }
+
+    .reflection-content ul,
+    .reflection-content ol {
+        margin: 0 0 1rem 1.25rem;
+        padding: 0;
+    }
+
+    .reflection-content li + li {
+        margin-top: 0.35rem;
+    }
+
+    .reflection-content blockquote {
+        margin: 1.25rem 0;
+        border-left: 3px solid var(--color-gold-400);
+        padding: 0.25rem 0 0.25rem 1rem;
+        color: var(--color-ink-700);
+        font-style: italic;
+    }
+
+    .reflection-content hr {
+        margin: 1.5rem 0;
+        border: 0;
+        border-top: 1px solid var(--color-ivory-200);
+    }
